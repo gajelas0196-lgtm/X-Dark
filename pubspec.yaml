@@ -1,7 +1,7 @@
 name: wongirengjembuten365
 description: "Sikma"
 publish_to: 'none'
-version: 4.1.0
+version: 1.5.0
 
 environment:
   sdk: ^3.8.1
@@ -11,6 +11,7 @@ dependencies:
     sdk: flutter
   http: ^0.13.5
   url_launcher: ^6.2.6
+  just_audio: ^0.9.36
   cupertino_icons: ^1.0.8
   shared_preferences: ^2.2.2
   device_info_plus: ^10.1.0
@@ -52,6 +53,7 @@ flutter:
     - assets/videos/banner.mp4
     - assets/videos/bnb.mp4
     - assets/videos/bug.mp4
+    - assets/music/Rumah-Ke-Rumah.mp3
 
   fonts:
     - family: Orbitron

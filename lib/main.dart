@@ -9,6 +9,8 @@ import 'seller_page.dart';
 import 'admin_page.dart';
 import 'buy_account.dart';
 import 'splash.dart'; 
+import 'music_page.dart'
+import 'chat_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -45,19 +47,25 @@ class MyApp extends StatelessWidget {
         final args = settings.arguments as Map<String, dynamic>?;
 
         switch (settings.name) {
-          case '/':
-            return MaterialPageRoute(builder: (_) => const LandingPage());
+  case '/chat':
+    final sessionKey = args?['sessionKey'] ?? 'default_session_123';
+    return MaterialPageRoute(
+      builder: (_) => ChatPage(sessionKey: sessionKey),
+    );
 
-          case '/login':
-            return MaterialPageRoute(builder: (_) => const LoginPage());
+  case '/login':
+    return MaterialPageRoute(builder: (_) => const LoginPage());
 
-          case '/splash':
-            return MaterialPageRoute(
-              builder: (_) => SplashPage(data: args ?? {}),
-            );
+  case '/splash':
+    return MaterialPageRoute(
+      builder: (_) => SplashPage(data: args ?? {}),
+    );
 
-          case '/buy_account':
-            return MaterialPageRoute(builder: (_) => const BuyAccountPage());
+  case '/buy_account':
+    return MaterialPageRoute(builder: (_) => const BuyAccountPage());
+    
+  // ... sisa case lainnya ...
+}
 
           case '/loader':
             return MaterialPageRoute(

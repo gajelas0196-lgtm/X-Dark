@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:web_socket_channel/io.dart';
+import 'package:http/http.dart' as http;
 
 class ChatPage extends StatefulWidget {
   final String sessionKey;
@@ -13,6 +14,8 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
+// GANTI dengan URL Pterodactyl kamu
+final String apiUrl = 'http://panel4.ikyyhost.cloud:2283/api/chat'; 
   late IOWebSocketChannel channel;
   List<String> chatUsers = [];
   String? selectedUser;
@@ -36,6 +39,19 @@ class _ChatPageState extends State<ChatPage> {
 
       switch (data['type']) {
         case 'chatList':
+        switch (data['type']) {
+  case 'chatList': // <--- Baris 41
+    setState(() {
+      chatUsers = List<String>.from(data['users']);
+      // Tambahkan AI ke urutan paling atas
+      if (!chatUsers.contains("AI")) {
+        chatUsers.insert(0, "AI"); 
+      }
+    });
+    break; // <--- Baris 43
+    
+  case 'chat':
+    // ... kode case 'chat' kamu yang lama ...
           setState(() => chatUsers = List<String>.from(data['users']));
           break;
         case 'chat':
