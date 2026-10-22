@@ -9,7 +9,7 @@ import 'seller_page.dart';
 import 'admin_page.dart';
 import 'buy_account.dart';
 import 'splash.dart'; 
-import 'music_page.dart'
+import 'music_page.dart';
 import 'chat_page.dart';
 
 void main() {
