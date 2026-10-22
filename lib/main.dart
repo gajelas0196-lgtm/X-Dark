@@ -112,4 +112,3 @@ class MyApp extends StatelessWidget {
       );     // tutup MaterialPageRoute
     },       // tutup switch
   );         // tutup onGenerateRoute
-}            // tutup class MyApp
