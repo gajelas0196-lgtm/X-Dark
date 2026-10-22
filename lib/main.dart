@@ -110,7 +110,6 @@ class MyApp extends StatelessWidget {
                 body: Center(child: Text("404 - PANEL NOT FOUND", style: TextStyle(color: Colors.red))),
               ),
             );
-        }
       },
     );
   }
