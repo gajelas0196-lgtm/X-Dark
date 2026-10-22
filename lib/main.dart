@@ -63,9 +63,6 @@ class MyApp extends StatelessWidget {
 
   case '/buy_account':
     return MaterialPageRoute(builder: (_) => const BuyAccountPage());
-    
-  // ... sisa case lainnya ...
-}
 
           case '/loader':
             return MaterialPageRoute(
