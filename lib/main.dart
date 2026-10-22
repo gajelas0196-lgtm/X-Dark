@@ -109,8 +109,8 @@ class MyApp extends StatelessWidget {
               builder: (_) => const Scaffold(
                 body: Center(child: Text("404 - PANEL NOT FOUND", style: TextStyle(color: Colors.red))),
               ),
-            );
-      },
-    );
-  }
-}
+                    ),   // tutup Scaffold
+      );     // tutup MaterialPageRoute
+    },       // tutup switch
+  );         // tutup onGenerateRoute
+}            // tutup class MyApp
