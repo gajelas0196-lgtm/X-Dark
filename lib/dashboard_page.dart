@@ -20,7 +20,6 @@ import 'tools_gateway.dart';
 import 'login_page.dart';
 import 'bug_sender.dart';
 import 'contact_page.dart';
-import 'profile_page.dart';
 import 'riwayat_page.dart';
 import 'info_page.dart';
 
@@ -570,7 +569,6 @@ class _DashboardPageState extends State<DashboardPage>
           icon: Icons.account_circle_outlined,
           onTap: () => Navigator.push(
             context,
-            _slideRoute(ProfilePage(
               username: username, password: password,
               role: role, expiredDate: expiredDate,
               sessionKey: sessionKey,
