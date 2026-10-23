@@ -81,7 +81,7 @@ class _QrGeneratorPageState extends State<QrGeneratorPage> {
         files: [XFile(file.path)],
         text: 'QR Code dari: ${_textController.text}',
       );
-      await Share.share(shareParams.files!, subject: shareParams.text);
+      await Share.shareXFiles([XFile(file.path)], text: 'QR Code dari: ${_textController.text}');
       
     } catch (e) {
       if (mounted) {
