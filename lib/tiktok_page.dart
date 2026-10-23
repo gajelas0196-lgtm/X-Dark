@@ -19,16 +19,6 @@ class _TiktokDownloaderPageState extends State<TiktokDownloaderPage> {
   Map<String, dynamic>? _videoData;
   String? _errorMessage;
   VideoPlayerController? _videoController;
-  void _initializeVideoPlayer() {
-  if (_videoData?['urls'] != null && _videoData!['urls'].isNotEmpty) {
-    final videoUrl = _videoData!['urls'][0];
-    _videoController = VideoPlayerController.networkUrl(Uri.parse(videoUrl))
-      ..initialize().then((_) {
-        setState(() {}); // Cuma refresh UI buat nampilin video
-        _videoController?.play(); // Auto play
-      });
-  }
-  }
 
   // --- TEMA WARNA CYAN ---
   final Color bgDark = const Color(0xFF0B1A1A);
@@ -48,7 +38,6 @@ class _TiktokDownloaderPageState extends State<TiktokDownloaderPage> {
   void dispose() {
     _urlController.dispose();
     _videoController?.dispose();
-    _chewieController?.dispose();
     super.dispose();
   }
 
@@ -67,7 +56,7 @@ class _TiktokDownloaderPageState extends State<TiktokDownloaderPage> {
       _errorMessage = null;
       _videoData = null;
       _videoController?.dispose();
-      _chewieController?.dispose();
+      _videoController = null;
     });
 
     final apiUrl = Uri.parse("https://api.siputzx.my.id/api/d/tiktok?url=$url");
@@ -107,20 +96,8 @@ class _TiktokDownloaderPageState extends State<TiktokDownloaderPage> {
       final videoUrl = _videoData!['urls'][0];
       _videoController = VideoPlayerController.networkUrl(Uri.parse(videoUrl))
         ..initialize().then((_) {
-          setState(() {
-            _chewieController = ChewieController(
-              videoPlayerController: _videoController!,
-              autoPlay: true,
-              looping: false,
-              showControls: true,
-              materialProgressColors: ChewieProgressColors(
-                playedColor: primaryCyan,
-                handleColor: accentCyan,
-                backgroundColor: textGrey.withOpacity(0.3),
-                bufferedColor: textGrey.withOpacity(0.2),
-              ),
-            );
-          });
+          setState(() {}); 
+          _videoController?.play(); 
         });
     }
   }
@@ -275,6 +252,218 @@ class _TiktokDownloaderPageState extends State<TiktokDownloaderPage> {
                   child: Row(
                     children: [
                       Icon(Icons.error_outline, color: Colors.cyanAccent),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Text(
+                          _errorMessage!,
+                          style: TextStyle(color: Colors.cyanAccent, fontSize: 14),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+              const SizedBox(height: 20),
+
+              if (_videoData != null)
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            color: cardDark,
+                            borderRadius: BorderRadius.circular(16),
+                            border: Border.all(color: primaryCyan.withOpacity(0.3)),
+                            boxShadow: [
+                              BoxShadow(
+                                color: primaryCyan.withOpacity(0.2),
+                                blurRadius: 8,
+                                offset: const Offset(0, 2),
+                              ),
+                            ],
+                          ),
+                          child: Column(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                                decoration: BoxDecoration(
+                                  gradient: cyanGradient,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Icon(Icons.videocam, color: primaryWhite, size: 16),
+                                    SizedBox(width: 8),
+                                    Text(
+                                      "VIDEO PREVIEW",
+                                      style: TextStyle(
+                                        color: primaryWhite,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'Orbitron',
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 16),
+
+                              if (_videoController != null && _videoController!.value.isInitialized)
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12),
+                                    border: Border.all(color: primaryCyan.withOpacity(0.5)),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: primaryCyan.withOpacity(0.3),
+                                        blurRadius: 10,
+                                        offset: Offset(0, 4),
+                                      ),
+                                    ],
+                                  ),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(12),
+                                    child: AspectRatio(
+                                      aspectRatio: _videoController!.value.aspectRatio,
+                                      child: Stack(
+                                        alignment: Alignment.bottomCenter,
+                                        children: [
+                                          VideoPlayer(_videoController!),
+                                          VideoProgressIndicator(_videoController!, allowScrubbing: true, colors: VideoProgressColors(
+                                            playedColor: primaryCyan,
+                                            bufferedColor: textGrey.withOpacity(0.2),
+                                            backgroundColor: textGrey.withOpacity(0.3),
+                                          )),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              else
+                                Container(
+                                  height: 200,
+                                  decoration: BoxDecoration(
+                                    color: Colors.black.withOpacity(0.5),
+                                    borderRadius: BorderRadius.circular(12),
+                                    border: Border.all(color: primaryCyan.withOpacity(0.3)),
+                                  ),
+                                  child: Center(
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        CircularProgressIndicator(color: accentCyan),
+                                        SizedBox(height: 16),
+                                        Text(
+                                          'Loading video...',
+                                          style: TextStyle(
+                                            color: accentCyan,
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+
+                              const SizedBox(height: 16),
+
+                              if (_videoData?['metadata'] != null)
+                                Container(
+                                  padding: const EdgeInsets.all(12),
+                                  decoration: BoxDecoration(
+                                    color: Colors.black.withOpacity(0.3),
+                                    borderRadius: BorderRadius.circular(12),
+                                    border: Border.all(color: primaryCyan.withOpacity(0.2)),
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        _videoData!['metadata']['title'] ?? 'No Title',
+                                        style: TextStyle(
+                                          color: primaryWhite,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      const SizedBox(height: 8),
+                                      Row(
+                                        children: [
+                                          Icon(Icons.person, color: accentCyan, size: 16),
+                                          SizedBox(width: 8),
+                                          Text(
+                                            'Creator: ${_videoData!['metadata']['creator'] ?? 'Unknown'}',
+                                            style: TextStyle(
+                                              color: textGrey,
+                                              fontSize: 14,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+
+                              const SizedBox(height: 16),
+
+                              SizedBox(
+                                width: double.infinity,
+                                child: ElevatedButton(
+                                  onPressed: _shareVideo,
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: accentCyan,
+                                    foregroundColor: primaryWhite,
+                                    padding: const EdgeInsets.symmetric(vertical: 16),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    elevation: 4,
+                                    shadowColor: accentCyan.withOpacity(0.5),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(Icons.share, size: 20, color: primaryWhite),
+                                      SizedBox(width: 8),
+                                      Text(
+                                        'SHARE VIDEO',
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: 'Orbitron',
+                                            color: primaryWhite
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
+              if (_videoData == null && !_isLoading && _errorMessage == null)
+                Expanded(
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.video_library,
+                          size: 80,
+                          color: primaryCyan.withOpacity(0.3),
+                        ),
+                        SizedBox(height: 16),
+                        Tex color: Colors.cyanAccent),
                       const SizedBox(width: 12),
                       Expanded(
                         child: Text(
