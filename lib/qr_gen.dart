@@ -76,12 +76,11 @@ class _QrGeneratorPageState extends State<QrGeneratorPage> {
       final file = File('${tempDir.path}/qr_code_${DateTime.now().millisecondsSinceEpoch}.png');
       await file.writeAsBytes(_qrImage!);
 
-      // Pakai cara share yang paling update biar XFile kebaca
-      final shareParams = ShareParams(
-        files: [XFile(file.path)],
-        text: 'QR Code dari: ${_textController.text}',
+      // PAKAI CARA INI (Share.shareXFiles) BIAR NGGAK ERROR
+      await Share.shareXFiles(
+        [XFile(file.path)], 
+        text: 'QR Code dari: ${_textController.text}'
       );
-      await Share.shareXFiles([XFile(file.path)], text: 'QR Code dari: ${_textController.text}');
       
     } catch (e) {
       if (mounted) {
