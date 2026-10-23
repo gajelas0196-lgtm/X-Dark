@@ -24,28 +24,17 @@ jobs:
           flutter-version: '3.35.0'
           channel: 'stable'
 
-      # 1. Masuk ke folder 'base' dulu
-      - name: Set working directory
-        run: echo "WORKDIR=./base" >> $GITHUB_ENV
-
-      # 2. Bersihin cache (Biar error StandardFileSystem hilang)
       - name: Clean Cache
-        working-directory: ${{ env.WORKDIR }}
         run: flutter clean
 
-      # 3. Get dependencies
       - name: Get dependencies
-        working-directory: ${{ env.WORKDIR }}
         run: flutter pub get
 
-      # 4. Build APK
       - name: Build APK
-        working-directory: ${{ env.WORKDIR }}
         run: flutter build apk --release
 
-      # 5. Upload APK (Path diarahkan ke folder base)
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: app-release
-          path: base/build/app/outputs/flutter-apk/app-release.apk
+          path: build/app/outputs/flutter-apk/app-release.apk
