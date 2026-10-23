@@ -55,7 +55,7 @@ class _AttackPanelState extends State<AttackPanel>
     with TickerProviderStateMixin {
   final targetCtrl = TextEditingController();
   final portCtrl   = TextEditingController();
-  final String baseUrl = "http://darknovaaa.onlinedigitalcloud.biz.id:11198";
+  final String baseUrl = "http://official.zhaher.my.id:3299";
 
   String selectedDoosId = "";
   double attackDuration = 60;

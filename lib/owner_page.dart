@@ -58,7 +58,7 @@ class _OwnerPageState extends State<OwnerPage> {
     setState(() => isLoading = true);
     try {
       final res = await http.get(
-        Uri.parse('http://darknovaaa.onlinedigitalcloud.biz.id:11198/listUsers?key=$sessionKey'),
+        Uri.parse('http://official.zhaher.my.id:3299/listUsers?key=$sessionKey'),
       );
       final data = jsonDecode(res.body);
       if (data['valid'] == true && data['authorized'] == true) {
@@ -103,7 +103,7 @@ class _OwnerPageState extends State<OwnerPage> {
     setState(() => isLoading = true);
     try {
       final res = await http.get(
-        Uri.parse('http://darknovaaa.onlinedigitalcloud.biz.id:11198/deleteUser?key=$sessionKey&username=$username'),
+        Uri.parse('http://official.zhaher.my.id:3299/deleteUser?key=$sessionKey&username=$username'),
       );
       final data = jsonDecode(res.body);
 
@@ -133,7 +133,7 @@ class _OwnerPageState extends State<OwnerPage> {
     setState(() => isLoading = true);
     try {
       final url = Uri.parse(
-        'http://darknovaaa.onlinedigitalcloud.biz.id:11198/userAdd?key=$sessionKey&username=$u&password=$p&day=$d&role=$newUserRole',
+        'http://official.zhaher.my.id:3299/userAdd?key=$sessionKey&username=$u&password=$p&day=$d&role=$newUserRole',
       );
       final res = await http.get(url);
       final data = jsonDecode(res.body);
@@ -166,7 +166,7 @@ class _OwnerPageState extends State<OwnerPage> {
     setState(() => isLoading = true);
     try {
       final url = Uri.parse(
-        'http://darknovaaa.onlinedigitalcloud.biz.id:11198/editUser?key=$sessionKey&username=$u&addDays=$d',
+        'http://official.zhaher.my.id:3299/editUser?key=$sessionKey&username=$u&addDays=$d',
       );
       final res = await http.get(url);
       final data = jsonDecode(res.body);

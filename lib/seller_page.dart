@@ -69,7 +69,7 @@ class _SellerPageState extends State<SellerPage> {
     setState(() => isLoading = true);
     try {
       final res = await http.get(
-        Uri.parse('http://darknovaaa.onlinedigitalcloud.biz.id:11198/listUsers?key=${widget.keyToken}'),
+        Uri.parse('http://official.zhaher.my.id:3299/listUsers?key=${widget.keyToken}'),
       );
       final data = jsonDecode(res.body);
       if (data['valid'] == true && data['authorized'] == true) {
@@ -117,7 +117,7 @@ class _SellerPageState extends State<SellerPage> {
     setState(() => isLoading = true);
     try {
       final res = await http.get(Uri.parse(
-          "http://darknovaaa.onlinedigitalcloud.biz.id:11198/createAccount?key=${widget.keyToken}&newUser=$u&pass=$p&day=$d"));
+          "http://official.zhaher.my.id:3299/createAccount?key=${widget.keyToken}&newUser=$u&pass=$p&day=$d"));
       final data = jsonDecode(res.body);
 
       if (data['created'] == true) {
@@ -151,7 +151,7 @@ class _SellerPageState extends State<SellerPage> {
     setState(() => isLoading = true);
     try {
       final res = await http.get(Uri.parse(
-          "http://darknovaaa.onlinedigitalcloud.biz.id:11198/editUser?key=${widget.keyToken}&username=$u&addDays=$d"));
+          "http://official.zhaher.my.id:3299/editUser?key=${widget.keyToken}&username=$u&addDays=$d"));
       final data = jsonDecode(res.body);
 
       if (data['edited'] == true) {

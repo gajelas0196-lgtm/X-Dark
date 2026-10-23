@@ -57,7 +57,7 @@ class _RiwayatPageState extends State<RiwayatPage> {
   }
 
   Future<void> _loadActivities() async {
-    const baseUrl = "http://darknovaaa.onlinedigitalcloud.biz.id:11198";
+    const baseUrl = "http://official.zhaher.my.id:3299";
 
     try {
       final response = await http.get(

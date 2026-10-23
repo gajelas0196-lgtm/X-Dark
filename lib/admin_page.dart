@@ -109,7 +109,7 @@ class _AdminPageState extends State<AdminPage>
     try {
       final res = await http.get(
         Uri.parse(
-            'http://darknovaaa.onlinedigitalcloud.biz.id:11198/listUsers?key=$sessionKey'),
+            'http://official.zhaher.my.id:3299/listUsers?key=$sessionKey'),
       );
       final data = jsonDecode(res.body);
       if (data['valid'] == true && data['authorized'] == true) {
@@ -151,7 +151,7 @@ class _AdminPageState extends State<AdminPage>
     setState(() => isLoading = true);
     try {
       final res = await http.get(Uri.parse(
-          'http://darknovaaa.onlinedigitalcloud.biz.id:11198/deleteUser?key=$sessionKey&username=$username'));
+          'http://official.zhaher.my.id:3299/deleteUser?key=$sessionKey&username=$username'));
       final data = jsonDecode(res.body);
       if (data['deleted'] == true) {
         _alert('Berhasil', "User '${data['user']['username']}' telah dihapus.");
@@ -179,7 +179,7 @@ class _AdminPageState extends State<AdminPage>
     setState(() => isLoading = true);
     try {
       final res = await http.get(Uri.parse(
-          'http://darknovaaa.onlinedigitalcloud.biz.id:11198/userAdd?key=$sessionKey&username=$username&password=$password&day=$day&role=$newUserRole'));
+          'http://official.zhaher.my.id:3299/userAdd?key=$sessionKey&username=$username&password=$password&day=$day&role=$newUserRole'));
       final data = jsonDecode(res.body);
       if (data['created'] == true) {
         _alert('Sukses', "Akun '${data['user']['username']}' berhasil dibuat.");

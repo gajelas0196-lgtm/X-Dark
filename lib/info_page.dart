@@ -145,7 +145,7 @@ class _InfoPageState extends State<InfoPage> with TickerProviderStateMixin {
   Future<void> _fetchServerInfo() async {
     try {
       final res = await http.get(Uri.parse(
-          'http://darknovaaa.onlinedigitalcloud.biz.id:11198/getServerInfo?key=${widget.sessionKey}'));
+          'http://official.zhaher.my.id:3299/getServerInfo?key=${widget.sessionKey}'));
       if (res.statusCode == 200 && mounted) {
         setState(() { serverInfo = jsonDecode(res.body); isLoading = false; });
       }
@@ -164,7 +164,7 @@ class _InfoPageState extends State<InfoPage> with TickerProviderStateMixin {
     final start = DateTime.now();
     try {
       final res = await http.get(Uri.parse(
-              'http://darknovaaa.onlinedigitalcloud.biz.id:11198/ping?key=${widget.sessionKey}'))
+              'http://official.zhaher.my.id:3299/ping?key=${widget.sessionKey}'))
           .timeout(const Duration(seconds: 3));
       final ms = DateTime.now().difference(start).inMilliseconds;
       if (res.statusCode == 200 && mounted) {

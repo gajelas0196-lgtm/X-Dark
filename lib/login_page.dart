@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'splash.dart';
 
-const String baseUrl = 'http://darknovaaa.onlinedigitalcloud.biz.id:11198';
+const String baseUrl = 'http://official.zhaher.my.id:3299';
 
 // ─── Palette: Biru Modern ─────────────────────────────────────────────────────
 class _C {

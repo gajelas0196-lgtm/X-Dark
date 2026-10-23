@@ -32,7 +32,7 @@ class _ManageServerPageState extends State<ManageServerPage> {
 
   Future<void> _fetchVpsList() async {
     setState(() => isLoading = true);
-    final uri = Uri.parse('http://darknovaaa.onlinedigitalcloud.biz.id:11198/myServer?key=${widget.keyToken}');
+    final uri = Uri.parse('http://official.zhaher.my.id:3299/myServer?key=${widget.keyToken}');
     try {
       final res = await http.get(uri);
       final data = jsonDecode(res.body);
@@ -55,7 +55,7 @@ class _ManageServerPageState extends State<ManageServerPage> {
       return;
     }
 
-    final uri = Uri.parse('http://darknovaaa.onlinedigitalcloud.biz.id:11198/addServer');
+    final uri = Uri.parse('http://official.zhaher.my.id:3299/addServer');
     try {
       final res = await http.post(uri, body: {
         'key': widget.keyToken,
@@ -78,7 +78,7 @@ class _ManageServerPageState extends State<ManageServerPage> {
   }
 
   Future<void> _deleteVps(String host) async {
-    final uri = Uri.parse('http://darknovaaa.onlinedigitalcloud.biz.id:11198/delServer');
+    final uri = Uri.parse('http://official.zhaher.my.id:3299/delServer');
     try {
       final res = await http.post(uri, body: {
         'key': widget.keyToken,
