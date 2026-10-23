@@ -3,7 +3,6 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:video_player/video_player.dart';
-import 'package:chewie/chewie.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 const _baseUrl = 'http://official.zhaher.my.id:3299';
@@ -94,7 +93,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   late Animation<Offset>  _resultSlide;
 
   late VideoPlayerController _videoCtrl;
-  ChewieController? _chewieCtrl;
   bool _videoReady = false;
 
   bool get canAccessGlobalSender {
@@ -144,7 +142,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     _waveCtrl.dispose();
     targetCtrl.dispose();
     _videoCtrl.dispose();
-    _chewieCtrl?.dispose();
     super.dispose();
   }
 
@@ -155,7 +152,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       if (!mounted) return;
       _videoCtrl.setVolume(0);
       setState(() {
-        _chewieCtrl = ChewieController(
           videoPlayerController: _videoCtrl,
           autoPlay: true,
           looping: true,
@@ -419,10 +415,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         border: Border.all(color: _C.borderLit),
         boxShadow: [BoxShadow(color: _C.blue.withOpacity(0.12), blurRadius: 24, offset: const Offset(0, 8))],
       ),
-      child: _videoReady && _chewieCtrl != null
           ? Stack(children: [
               AspectRatio(aspectRatio: _videoCtrl.value.aspectRatio,
-                  child: Chewie(controller: _chewieCtrl!)),
               Positioned(top: 0, left: 0, right: 0,
                 child: Container(height: 2,
                   decoration: const BoxDecoration(gradient: LinearGradient(

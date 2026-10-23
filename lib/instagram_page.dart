@@ -4,7 +4,6 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:video_player/video_player.dart';
-import 'package:chewie/chewie.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -63,7 +62,6 @@ class _InstagramDownloaderPageState extends State<InstagramDownloaderPage>
   bool _isSharing = false;
 
   VideoPlayerController? _videoCtrl;
-  ChewieController? _chewieCtrl;
 
   // Animations
   late AnimationController _bgCtrl;
@@ -121,7 +119,6 @@ class _InstagramDownloaderPageState extends State<InstagramDownloaderPage>
     _btnCtrl.dispose();
     _urlCtrl.dispose();
     _videoCtrl?.dispose();
-    _chewieCtrl?.dispose();
     super.dispose();
   }
 
@@ -134,13 +131,11 @@ class _InstagramDownloaderPageState extends State<InstagramDownloaderPage>
     }
 
     _videoCtrl?.dispose();
-    _chewieCtrl?.dispose();
     setState(() {
       _isLoading = true;
       _error = null;
       _mediaData = null;
       _videoCtrl = null;
-      _chewieCtrl = null;
     });
     _resultCtrl.reset();
 
@@ -172,18 +167,15 @@ class _InstagramDownloaderPageState extends State<InstagramDownloaderPage>
     final url = overrideUrl ?? _mediaData![0]['url'];
 
     _videoCtrl?.dispose();
-    _chewieCtrl?.dispose();
 
     _videoCtrl = VideoPlayerController.networkUrl(Uri.parse(url))
       ..initialize().then((_) {
         if (!mounted) return;
         setState(() {
-          _chewieCtrl = ChewieController(
             videoPlayerController: _videoCtrl!,
             autoPlay: true,
             looping: false,
             showControls: true,
-            materialProgressColors: ChewieProgressColors(
               playedColor: _C.blueMid,
               handleColor: _C.blueLight,
               backgroundColor: _C.border,
@@ -261,7 +253,6 @@ class _InstagramDownloaderPageState extends State<InstagramDownloaderPage>
                   ),
 
                   // Results
-                  if (_mediaData != null || _chewieCtrl != null)
                     SliverToBoxAdapter(
                       child: FadeTransition(
                         opacity: _resultFade,
@@ -272,7 +263,6 @@ class _InstagramDownloaderPageState extends State<InstagramDownloaderPage>
                             child: Column(
                               children: [
                                 // Video player
-                                if (_chewieCtrl != null) ...[
                                   _buildVideoPlayer(),
                                   const SizedBox(height: 14),
                                 ],
@@ -496,7 +486,6 @@ class _InstagramDownloaderPageState extends State<InstagramDownloaderPage>
             // Video
             AspectRatio(
               aspectRatio: _videoCtrl!.value.aspectRatio,
-              child: Chewie(controller: _chewieCtrl!),
             ),
           ],
         ),
