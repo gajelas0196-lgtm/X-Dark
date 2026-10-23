@@ -94,7 +94,7 @@ class _InstagramDownloaderPageState extends State<InstagramDownloaderPage>
         vsync: this, duration: const Duration(seconds: 8))
       ..repeat();
     _logoSpin  = Tween<double>(begin: 0, end: 1.0).animate(_logoCtrl);
-    _logoPulse = Tween<double>(begin: 0.85, end: 1.0)
+    _logoPulse = Tween<double>(begin: 0.85, end: 1.0).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
         .animate(CurvedAnimation(parent: _logoCtrl, curve: Curves.easeInOut));
 
     _resultCtrl = AnimationController(
