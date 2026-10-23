@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:video_player/video_player.dart';
-import 'package:chewie/chewie.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
@@ -20,7 +19,16 @@ class _TiktokDownloaderPageState extends State<TiktokDownloaderPage> {
   Map<String, dynamic>? _videoData;
   String? _errorMessage;
   VideoPlayerController? _videoController;
-  ChewieController? _chewieController;
+  void _initializeVideoPlayer() {
+  if (_videoData?['urls'] != null && _videoData!['urls'].isNotEmpty) {
+    final videoUrl = _videoData!['urls'][0];
+    _videoController = VideoPlayerController.networkUrl(Uri.parse(videoUrl))
+      ..initialize().then((_) {
+        setState(() {}); // Cuma refresh UI buat nampilin video
+        _videoController?.play(); // Auto play
+      });
+  }
+  }
 
   // --- TEMA WARNA CYAN ---
   final Color bgDark = const Color(0xFF0B1A1A);
