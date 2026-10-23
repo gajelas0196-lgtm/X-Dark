@@ -37,36 +37,32 @@ final String apiUrl = 'http://panel4.ikyyhost.cloud:2283/api/chat';
     channel.stream.listen((event) {
       final data = jsonDecode(event);
 
-      switch (data['type']) {
-        case 'chatList':
-        switch (data['type']) {
-  case 'chatList': // <--- Baris 41
-    setState(() {
-      chatUsers = List<String>.from(data['users']);
-      // Tambahkan AI ke urutan paling atas
-      if (!chatUsers.contains("AI")) {
-        chatUsers.insert(0, "AI"); 
-      }
-    });
-    break; // <--- Baris 43
-    
-  case 'chat':
-    // ... kode case 'chat' kamu yang lama ...
-          setState(() => chatUsers = List<String>.from(data['users']));
-          break;
-        case 'chat':
-          if (selectedUser == data['message']['from'] ||
-              selectedUser == data['message']['to']) {
-            setState(() => messages.add(Map<String, dynamic>.from(data['message'])));
-            _scrollToBottom();
+          switch (data['type']) {
+      case 'chatList':
+        setState(() {
+          chatUsers = List<String>.from(data['users']);
+          // Tambahkan AI ke urutan paling atas
+          if (!chatUsers.contains("AI")) {
+            chatUsers.insert(0, "AI");
           }
-          break;
-        case 'messages':
-          setState(() => messages = List<Map<String, dynamic>>.from(data['messages']));
+        });
+        break;
+
+      case 'chat':
+        if (selectedUser == data['message']['from'] ||
+            selectedUser == data['message']['to']) {
+          setState(() => messages.add(Map<String, dynamic>.from(data['message'])));
           _scrollToBottom();
-          break;
-      }
-    });
+        }
+        break;
+
+      case 'messages':
+        setState(() => messages = List<Map<String, dynamic>>.from(data['messages']));
+        _scrollToBottom();
+        break;
+    }
+  });
+}
   }
 
   void _scrollToBottom() {
