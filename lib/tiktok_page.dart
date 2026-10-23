@@ -523,7 +523,6 @@ class _TiktokDownloaderPageState extends State<TiktokDownloaderPage> {
                               ),
                               const SizedBox(height: 16),
 
-                              if (_chewieController != null)
                                 Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(12),
@@ -540,7 +539,6 @@ class _TiktokDownloaderPageState extends State<TiktokDownloaderPage> {
                                     borderRadius: BorderRadius.circular(12),
                                     child: AspectRatio(
                                       aspectRatio: _videoController!.value.aspectRatio,
-                                      child: Chewie(controller: _chewieController!),
                                     ),
                                   ),
                                 )
