@@ -648,55 +648,78 @@ class _DashboardPageState extends State<DashboardPage>
 
   // ── Drawer ────────────────────────────────────────────────────────────────
   Widget _buildDrawer() {
-    return Drawer(
-      backgroundColor: Colors.transparent,
-      width: MediaQuery.of(context).size.width * 0.78,
-      child: Container(
-        decoration: const BoxDecoration(
-          color: _C.surface,
-          border: Border(right: BorderSide(color: _C.border)),
-        ),
-        child: Column(
-          children: [
-            // ── Header ────────────────────────────────────────────────────
-            _DrawerHeader(
-              username: username,
-              role: role,
-              expiredDate: expiredDate,
-              profileImage: _profileImage,
-              videoCtrl: _menuVideoCtrl,
-            ),
-
-            // ── Menu items ────────────────────────────────────────────────
-            Expanded(
-              child: ListView(
-                padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-                children: [
-                  if (role == 'reseller')
-                    _DrawerItem(
-                      icon: Icons.storefront_rounded,
-                      label: 'Seller Page',
-                      onTap: () => _onDrawerNav(1),
-                    ),
-                  if (role == 'admin')
-                    _DrawerItem(
-                      icon: Icons.admin_panel_settings_rounded,
-                      label: 'Admin Page',
-                      onTap: () => _onDrawerNav(2),
-                    ),
-                  if (role == 'owner')
-                    _DrawerItem(
-                      icon: Icons.workspace_premium_rounded,
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
+  return Drawer(
+    backgroundColor: Colors.transparent,
+    width: MediaQuery.of(context).size.width * 0.78,
+    child: Container(
+      decoration: const BoxDecoration(
+        color: _C.surface,
+        border: Border(right: BorderSide(color: _C.border)),
       ),
-    );
+      child: Column(
+        children: [
+          _DrawerHeader(
+            username: username,
+            role: role,
+            expiredDate: expiredDate,
+            profileImage: _profileImage,
+            videoCtrl: _menuVideoCtrl,
+          ),
+          Expanded(
+            child: ListView(
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+              children: [
+                // Menu-menu simpel, tanpa kondisi role yang bikin error
+                _DrawerItem(
+                  icon: Icons.home_rounded,
+                  label: 'Beranda',
+                  onTap: () => Navigator.pop(context),
+                ),
+                _DrawerItem(
+                  icon: Icons.history_rounded,
+                  label: 'Riwayat Aktivitas',
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      _slideRoute(RiwayatPage(sessionKey: sessionKey, role: role)),
+                    );
+                  },
+                ),
+                _DrawerItem(
+                  icon: Icons.lock_outline_rounded,
+                  label: 'Ganti Password',
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      _slideRoute(ChangePasswordPage(username: username, sessionKey: sessionKey)),
+                    );
+                  },
+                ),
+                _DrawerItem(
+                  icon: Icons.logout_rounded,
+                  label: 'Keluar',
+                  isDestructive: true,
+                  onTap: () async {
+                    Navigator.pop(context);
+                    final prefs = await SharedPreferences.getInstance();
+                    await prefs.clear();
+                    if (!mounted) return;
+                    Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(builder: (_) => const LoginPage()),
+                      (_) => false,
+                    );
+                  },
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
   }
-}
 
 // ─── Stats Strip ──────────────────────────────────────────────────────────────
 class _StatsStrip extends StatelessWidget {
