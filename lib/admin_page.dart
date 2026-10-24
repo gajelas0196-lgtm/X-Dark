@@ -981,7 +981,6 @@ class _AdminPageState extends State<AdminPage>
 
     return Row(
       children: [
-            Icons.people_outline_rounded, _C.blueLight),
             const SizedBox(width: 10),
             Icons.storefront_outlined, _C.black),
         const SizedBox(width: 10),
