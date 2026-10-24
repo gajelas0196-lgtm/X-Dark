@@ -687,52 +687,6 @@ class _DashboardPageState extends State<DashboardPage>
                   if (role == 'owner')
                     _DrawerItem(
                       icon: Icons.workspace_premium_rounded,
-                      label: 'Owner Page',
-                      onTap: () => _onDrawerNav(3),
-                    ),
-                  _DrawerItem(
-                    icon: Icons.history_rounded,
-                    label: 'Riwayat Aktivitas',
-                    onTap: () {
-                      Navigator.pop(context);
-                      Navigator.push(
-                        context,
-                        _slideRoute(RiwayatPage(
-                            sessionKey: sessionKey, role: role)),
-                      );
-                    },
-                  ),
-                  _DrawerItem(
-                    icon: Icons.lock_outline_rounded,
-                    label: 'Ganti Password',
-                    onTap: () {
-                      Navigator.pop(context);
-                      Navigator.push(
-                        context,
-                        _slideRoute(ChangePasswordPage(
-                            username: username, sessionKey: sessionKey)),
-                      );
-                    },
-                  ),
-                ],
-              ),
-            ),
-
-            // ── Logout ────────────────────────────────────────────────────
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
-              child: _DrawerItem(
-                icon: Icons.logout_rounded,
-                label: 'Keluar',
-                isDestructive: true,
-                onTap: () async {
-                  Navigator.pop(context);
-                  final prefs = await SharedPreferences.getInstance();
-                  await prefs.clear();
-                  if (!mounted) return;
-                  Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(builder: (_) => const LoginPage()),
-                    (_) => false,
                   );
                 },
               ),
