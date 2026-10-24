@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'login_page.dart';
 
-class DashboardPage extends StatefulWidget {
-  final String username;
+ class DashboardPage extends StatefulWidget {
+ final List<Map<String, dynamic>> listBug;
+final List<Map<String, dynamic>> listDoos;
+final List<dynamic> news; final String username;
   final String password;
   final String role;
   final String expiredDate;
@@ -16,6 +18,9 @@ class DashboardPage extends StatefulWidget {
     required this.role,
     required this.expiredDate,
     required this.sessionKey,
+required this.listBug,
+required this.listDoos,
+required this.news,
   });
 
   @override
