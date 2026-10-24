@@ -687,47 +687,6 @@ class _DashboardPageState extends State<DashboardPage>
                   },
                 ),
                 _DrawerItem(
-                  icon: Icons.lock_outline_rounded,
-                  label: 'Ganti Password',
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.push(
-                      context,
-                      _slideRoute(ChangePasswordPage(username: username, sessionKey: sessionKey)),
-                    );
-                  },
-                ),
-                _DrawerItem(
-                  icon: Icons.logout_rounded,
-                  label: 'Keluar',
-                  isDestructive: true,
-                  onTap: () async {
-                    Navigator.pop(context);
-                    final prefs = await SharedPreferences.getInstance();
-                    await prefs.clear();
-                    if (!mounted) return;
-                    Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (_) => const LoginPage()),
-                      (_) => false,
-                    );
-                  },
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    ),
-  );
-  }
-
-// ─── Stats Strip ──────────────────────────────────────────────────────────────
-class _StatsStrip extends StatelessWidget {
-  final int online;
-  final int connections;
-  const _StatsStrip({required this.online, required this.connections});
-
-  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
