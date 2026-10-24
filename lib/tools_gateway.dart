@@ -178,9 +178,7 @@ class _ToolsPageState extends State<ToolsPage> with TickerProviderStateMixin {
 
   List<_ToolItem> _downloaderItems() => [
     _ToolItem(icon: Icons.video_library_rounded, label: 'TikTok Downloader',    accent: _C.pink,
-        onTap: () => _push(const TiktokDownloaderPage())),
     _ToolItem(icon: Icons.camera_alt_rounded,    label: 'Instagram Downloader', accent: _C.purple,
-        onTap: () => _push(const InstagramDownloaderPage())),
   ];
 
   List<_ToolItem> _utilityItems() => [
