@@ -687,52 +687,6 @@ class _DashboardPageState extends State<DashboardPage>
                   if (role == 'owner')
                     _DrawerItem(
                       icon: Icons.workspace_premium_rounded,
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-// ─── Stats Strip ──────────────────────────────────────────────────────────────
-class _StatsStrip extends StatelessWidget {
-  final int online;
-  final int connections;
-  const _StatsStrip({required this.online, required this.connections});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        decoration: BoxDecoration(
-          color: _C.card,
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: _C.border),
-        ),
-        child: Row(
-          children: [
-            _StatItem(
-              icon: Icons.people_alt_rounded,
-              label: 'Online',
-              value: '$online',
-              color: _C.green,
-            ),
-            Container(
-              width: 1, height: 32, color: _C.border,
-              margin: const EdgeInsets.symmetric(horizontal: 16),
-            ),
-            _StatItem(
-              icon: Icons.wifi_rounded,
-              label: 'Koneksi',
-              value: '$connections',
-              color: _C.blueLight,
-            ),
             const Spacer(),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
