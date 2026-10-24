@@ -981,23 +981,19 @@ class _AdminPageState extends State<AdminPage>
 
     return Row(
       children: [
-        _buildStatCard('Total User', '$totalAll',
             Icons.people_outline_rounded, _C.blueLight),
             const SizedBox(width: 10),
             Icons.storefront_outlined, _C.black),
         const SizedBox(width: 10),
             Icons.storefront_outlined, _C.green),
             const SizedBox(width: 10),
-        _buildStatCard('Reseller', '$totalReseller',
             Icons.storefront_outlined, _C.bluedark),
         const SizedBox(width: 10),
-        _buildStatCard('Member', '$totalMember',
             Icons.person_outline_rounded, _C.blueAccent),
       ],
     );
   }
 
-  Widget _buildStatCard(
       String label, String value, IconData icon, Color color) {
     return Expanded(
       child: Container(
