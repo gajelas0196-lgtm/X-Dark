@@ -417,7 +417,7 @@ class _DashboardPageState extends State<DashboardPage>
         break;
       case 'tools':
         nextIndex = 5;
-        nextPage = ToolsGateway(
+        nextPage = ToolsPage(
           username: username,
           password: password,
           role: role,
@@ -427,14 +427,7 @@ class _DashboardPageState extends State<DashboardPage>
         break;
       case 'bug':
         nextIndex = 6;
-        nextPage = AttackPage(
-          username: username,
-          password: password,
-          listBug: listBug,
-          role: role,
-          expiredDate: expiredDate,
-          sessionKey: sessionKey,
-        );
+        nextPage = AttackPage(username: username, password: password, listBug: listBug, role: role, expiredDate: expiredDate, sessionKey: sessionKey);
         break;
       case 'profile':
         nextIndex = 7;
@@ -442,13 +435,7 @@ class _DashboardPageState extends State<DashboardPage>
         break;
       case 'settings':
         nextIndex = 8;
-        nextPage = ChangePasswordPage(
-          username: username,
-          password: password,
-          role: role,
-          expiredDate: expiredDate,
-          sessionKey: sessionKey,
-        );
+        nextPage = ChangePasswordPage(username: username, sessionKey: sessionKey);
         break;
     }
 
