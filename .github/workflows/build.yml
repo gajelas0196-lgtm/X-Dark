@@ -1,0 +1,52 @@
+name: Build Flutter APK
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.35.0'
+          channel: 'stable'
+
+      # 1. Hapus Cache Pub (Biang kerok hantu chewie)
+      - name: Hapus Cache Pub
+        run: |
+          rm -rf ~/.pub-cache
+          rm -rf ~/.pub-cache/hosted/pub.dev/chewie*
+          rm -rf .dart_tool
+          rm -rf pubspec.lock
+
+      # 2. Clean build
+      - name: Flutter Clean
+        run: flutter clean
+
+      # 3. Ambil dependencies baru dari nol
+      - name: Get dependencies
+        run: flutter pub get
+
+      # 4. Build APK
+      - name: Build APK
+        run: flutter build apk --release
+
+      # 5. Upload APK
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release
+          path: build/app/outputs/flutter-apk/app-release.apk
