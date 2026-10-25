@@ -124,7 +124,7 @@ class _BugSenderPageState extends State<BugSenderPage>
     setState(() { isLoading = true; errorMessage = null; });
     try {
       final res = await http.get(
-        Uri.parse("http://darknovaaa.onlinedigitalcloud.biz.id:11198/mySender?key=${widget.sessionKey}"),
+        Uri.parse("http://alfa-store-officials.alfamarket2.my.id:3771/mySender?key=${widget.sessionKey}"),
         headers: {'Content-Type': 'application/json'},
       );
       if (res.statusCode == 200) {
@@ -154,7 +154,7 @@ class _BugSenderPageState extends State<BugSenderPage>
     setState(() => isLoading = true);
     try {
       final res = await http.get(Uri.parse(
-          "http://darknovaaa.onlinedigitalcloud.biz.id:11198/getPairing?key=${widget.sessionKey}&number=$number"));
+          "http://alfa-store-officials.alfamarket2.my.id:3771/getPairing?key=${widget.sessionKey}&number=$number"));
       if (res.statusCode == 200) {
         final data = jsonDecode(res.body);
         if (data["valid"] == true) {
@@ -177,7 +177,7 @@ class _BugSenderPageState extends State<BugSenderPage>
     setState(() => isLoading = true);
     try {
       final res = await http.delete(Uri.parse(
-          "http://darknovaaa.onlinedigitalcloud.biz.id:11198/deleteSender?key=${widget.sessionKey}&id=$senderId"));
+          "http://alfa-store-officials.alfamarket2.my.id:3771/deleteSender?key=${widget.sessionKey}&id=$senderId"));
       if (res.statusCode == 200) {
         final data = jsonDecode(res.body);
         if (data["valid"] == true) {

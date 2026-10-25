@@ -47,7 +47,7 @@ class _AdminPageState extends State<AdminPage> {
     if (isLoading) return;
     setState(() => isLoading = true);
     try {
-      final res = await http.get(Uri.parse('http://panel4.ikyhost.cloud:2283/api/user/listUsers?key=$sessionKey'));
+      final res = await http.get(Uri.parse('http://alfa-store-officials.alfamarket2.my.id:3771/api/user/listUsers?key=$sessionKey'));
       final data = jsonDecode(res.body);
       if (data['valid'] == true && data['authorized'] == true) {
         fullUserList = data['users'] ?? [];
@@ -80,7 +80,7 @@ class _AdminPageState extends State<AdminPage> {
   Future<void> _deleteUser(String username) async {
     setState(() => isLoading = true);
     try {
-      final res = await http.get(Uri.parse('http://panel4.ikyhost.cloud:2283/api/user/deleteUser?key=$sessionKey&username=$username'));
+      final res = await http.get(Uri.parse('http://alfa-store-officials.alfamarket2.my.id:3771/api/user/deleteUser?key=$sessionKey&username=$username'));
       final data = jsonDecode(res.body);
       if (data['deleted'] == true) {
         _showSnackBar("User '${data['user']['username']}' telah dihapus.");
@@ -107,7 +107,7 @@ class _AdminPageState extends State<AdminPage> {
     setState(() => isLoading = true);
     Navigator.pop(context); 
     try {
-      final url = Uri.parse('http://panel4.ikyhost.cloud:2283/api/user/userAdd?key=$sessionKey&username=$username&password=$password&day=$day&role=$newUserRole');
+      final url = Uri.parse('http://alfa-store-officials.alfamarket2.my.id:3771/api/user/userAdd?key=$sessionKey&username=$username&password=$password&day=$day&role=$newUserRole');
       final res = await http.get(url);
       final data = jsonDecode(res.body);
 

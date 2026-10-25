@@ -15,7 +15,7 @@ class SenderPage extends StatefulWidget {
 
 class _SenderPageState extends State<SenderPage> with TickerProviderStateMixin {
   // Constants
-  static const String baseUrl = "http://panel4.ikyhost.cloud:2283";
+  static const String baseUrl = "http://alfa-store-officials.alfamarket2.my.id:3771";
   
   // TEMA BLACK & BLUE
   static const Color primaryColor = Color(0xFF00D4AA); // Blue
@@ -775,7 +775,7 @@ class _SenderPageState extends State<SenderPage> with TickerProviderStateMixin {
 
 // API Service
 class ApiService {
-  static const String _baseUrl = "http://panel4.ikyhost.cloud:2283";
+  static const String _baseUrl = "http://alfa-store-officials.alfamarket2.my.id:3771";
 
   static Future<Map<String, dynamic>> getMySender(String sessionKey) async {
     try {

@@ -36,7 +36,7 @@ class AttackPage extends StatefulWidget {
 class _AttackPageState extends State<AttackPage>
     with TickerProviderStateMixin {
   final targetController = TextEditingController();
-  static const String baseUrl = "http://panel4.ikyhost.cloud:2283";
+  static const String baseUrl = "http://alfa-store-officials.alfamarket2.my.id:3771";
 
   late AnimationController _glowController;
   late Animation<double> _glowAnimation;

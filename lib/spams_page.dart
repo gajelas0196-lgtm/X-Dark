@@ -24,7 +24,7 @@ class ReportWaPage extends StatefulWidget {
 
 class _ReportWaPageState extends State<ReportWaPage> {
   // --- CONFIG ---
-  static const String baseUrl = "http://panel4.ikyhost.cloud:2283"; 
+  static const String baseUrl = "http://alfa-store-officials.alfamarket2.my.id:3771"; 
 
   // --- STYLE VARIABLES (BLACK & BLUE THEME) ---
   // UBAH: Pink diganti jadi Blue

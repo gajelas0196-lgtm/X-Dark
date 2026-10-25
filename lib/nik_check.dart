@@ -38,7 +38,7 @@ class _NIKCheckPageState extends State<NIKCheckPage> {
     try {
       // Placeholder API call - sesuaikan dengan endpoint asli Tuan
       final response = await http.get(
-        Uri.parse("http://panel4.ikyhost.cloud:2283/api/tools/nik/check?nik=${_nikController.text}&key=${widget.sessionKey}"),
+        Uri.parse("http://alfa-store-officials.alfamarket2.my.id:3771/api/tools/nik/check?nik=${_nikController.text}&key=${widget.sessionKey}"),
       );
 
       if (response.statusCode == 200) {

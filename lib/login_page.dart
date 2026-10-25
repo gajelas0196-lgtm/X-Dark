@@ -5,7 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 
-const String baseUrl = "http://panel4.ikyhost.cloud:2283";
+const String baseUrl = "http://alfa-store-officials.alfamarket2.my.id:3771";
 
 // ── WARNA TEMA MANTA'X ──────────────────────────────────────────────────
 const Color _primary = Color(0xFF00D4AA);   // teal utama
