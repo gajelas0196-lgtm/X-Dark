@@ -417,7 +417,7 @@ class _DashboardPageState extends State<DashboardPage>
         break;
       case 'tools':
         nextIndex = 5;
-        nextPage = ToolsPage(
+        nextPage = ToolsGatewayPage(
           username: username,
           password: password,
           role: role,

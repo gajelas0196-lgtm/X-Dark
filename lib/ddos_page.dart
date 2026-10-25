@@ -7,11 +7,11 @@ import 'phone_lookup.dart';
 import 'subdomain_finder_page.dart';
 import 'anime.dart';
 
-class ToolsPage extends StatefulWidget {
+class DdosPage extends StatefulWidget {
   final String sessionKey;
   final String userRole;
 
-  const ToolsPage({
+  const DdosPage({
     super.key,
     required this.sessionKey,
     required this.userRole,

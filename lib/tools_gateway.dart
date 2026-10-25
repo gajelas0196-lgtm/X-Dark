@@ -64,12 +64,12 @@ const _categories = [
 ];
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
-class ToolsPage extends StatefulWidget {
+class ToolsGatewayPage extends StatefulWidget {
   final String sessionKey;
   final String userRole;
   final List<Map<String, dynamic>> listDoos;
 
-  const ToolsPage({
+  const ToolsGatewayPage({
     super.key,
     required this.sessionKey,
     required this.userRole,
