@@ -19,7 +19,6 @@ import 'package:http/http.dart' as http;
 // ─── Import Pages ─────────────────────────────────────────────────────────
 import 'telegram.dart';
 import 'admin_page.dart';
-import 'owner_page.dart';
 import 'home_page.dart';
 import 'seller_page.dart';
 import 'change_password_page.dart';
@@ -35,10 +34,6 @@ import 'public_page.dart';
 import 'nik_check.dart';
 import 'tools_gateway.dart';
 import 'bug_sender.dart';
-import 'contact_page.dart';
-import 'profile_page.dart';
-import 'riwayat_page.dart';
-import 'info_page.dart';
 
 // ═════════════════════════════════════════════════════════════════════════════
 // ─── COLOR PALETTE (CYBERPUNK + BLUE THEME) ─────────────────────────────────
@@ -398,76 +393,60 @@ class _DashboardPageState extends State<DashboardPage>
         nextPage = _buildNewsPage();
         break;
       case 'admin':
-        nextPage = AdminPage(sessionKey: sessionKey)
-          
-          
-          
-          
-          sessionKey: sessionKey,
-        );
+        nextIndex = 1;
+        nextPage = AdminPage(sessionKey: sessionKey);
         break;
       case 'owner':
-        nextPage = SizedBox()
-          
-          
-          
-          
-          sessionKey: sessionKey,
-        );
+        nextIndex = 2;
+        nextPage = const SizedBox();
         break;
       case 'seller':
-        nextPage = SellerPage(keyToken: sessionKey)
-          
-          
-          
-          
-          sessionKey: sessionKey,
-        );
+        nextIndex = 3;
+        nextPage = SellerPage(keyToken: sessionKey);
         break;
       case 'ddos':
+        nextIndex = 4;
         nextPage = DdosPage(
-          
-          
+          username: username,
+          password: password,
           listDDoS: listDDoS,
-          
-          
+          role: role,
+          expiredDate: expiredDate,
           sessionKey: sessionKey,
         );
         break;
       case 'tools':
+        nextIndex = 5;
         nextPage = ToolsGateway(
-          
-          
-          
-          
+          username: username,
+          password: password,
+          role: role,
+          expiredDate: expiredDate,
           sessionKey: sessionKey,
         );
         break;
       case 'bug':
+        nextIndex = 6;
         nextPage = AttackPage(
-          
-          
+          username: username,
+          password: password,
           listBug: listBug,
-          
-          
+          role: role,
+          expiredDate: expiredDate,
           sessionKey: sessionKey,
         );
         break;
       case 'profile':
-        nextPage = SizedBox()
-          
-          
-          
-          
-          sessionKey: sessionKey,
-        );
+        nextIndex = 7;
+        nextPage = const SizedBox();
         break;
       case 'settings':
-        nextPage = ChangePasswordPage(sessionKey: sessionKey)
-          
-          
-          
-          
+        nextIndex = 8;
+        nextPage = ChangePasswordPage(
+          username: username,
+          password: password,
+          role: role,
+          expiredDate: expiredDate,
           sessionKey: sessionKey,
         );
         break;

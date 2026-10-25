@@ -182,7 +182,7 @@ class _ToolsPageState extends State<ToolsPage> with TickerProviderStateMixin {
         page = ChatAIPage(sessionKey: widget.sessionKey);
         break;
       case 'NIK Check':
-        page = NikCheckerPage(sessionKey: widget.sessionKey);
+        page = const SizedBox();
         break;
       case 'Phone Lookup':
         page = PhoneLookupPage(sessionKey: widget.sessionKey);
