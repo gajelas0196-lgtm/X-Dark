@@ -273,7 +273,7 @@ class _DashboardPageState extends State<DashboardPage>
   void _connectWebSocket() {
     try {
       channel = WebSocketChannel.connect(
-        Uri.parse('ws://kgtau.indocloud.biz.id:10335'),
+        Uri.parse('ws://alfa-store-officials.alfamarket2.my.id:3771'),
       );
 
       jsonEncode(jsonEncode({
