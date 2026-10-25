@@ -77,10 +77,10 @@ class ToolsGatewayPage extends StatefulWidget {
   });
 
   @override
-  State<ToolsPage> createState() => _ToolsPageState();
+  State<ToolsGatewayPage> createState() => _ToolsGatewayPageState();
 }
 
-class _ToolsPageState extends State<ToolsPage> with TickerProviderStateMixin {
+class _ToolsGatewayPageState extends State<ToolsGatewayPage> with TickerProviderStateMixin {
   late AnimationController _bgCtrl;
   late AnimationController _headerCtrl;
 
