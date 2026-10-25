@@ -11,7 +11,7 @@ class ToolsPage extends StatefulWidget {
   final String sessionKey;
   final String userRole;
 
-  const DdosPage({
+  const ToolsPage({
     super.key,
     required this.sessionKey,
     required this.userRole,
