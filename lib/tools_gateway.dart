@@ -146,9 +146,9 @@ class _ToolsPageState extends State<ToolsPage> with TickerProviderStateMixin {
   // ─── Tool items per category ──────────────────────────────────────────────
   List<_ToolItem> _ddosItems() => [
     _ToolItem(icon: Icons.bolt_rounded,     label: 'Attack Panel',  accent: _C.red,
-        onTap: () => _push(AttackPanel(sessionKey: widget.sessionKey, listDoos: widget.listDoos))),
+        onTap: () => _push(AttackPanel(sessionKey: widget.sessionKey))),
     _ToolItem(icon: Icons.dns_rounded,      label: 'Manage Server', accent: _C.amber,
-        onTap: () => _push(ManageServerPage(keyToken: widget.sessionKey))),
+        onTap: () => _push(ManageServerPage(sessionKey: widget.sessionKey))),
   ];
 
   List<_ToolItem> _networkItems() => [
@@ -163,9 +163,9 @@ class _ToolsPageState extends State<ToolsPage> with TickerProviderStateMixin {
 
   List<_ToolItem> _osintItems() => [
     _ToolItem(icon: Icons.badge_outlined,      label: 'NIK Detail',    accent: _C.purple,
-        onTap: () => _push(const NikCheckerPage())),
+        onTap: () => _push(NikCheckerPage())),
     _ToolItem(icon: Icons.travel_explore_rounded, label: 'Domain OSINT', accent: _C.blueLight,
-        onTap: () => _push(const DomainOsintPage())),
+        onTap: () => _push(DomainOsintPage())),
     _ToolItem(icon: Icons.person_search_rounded, label: 'Phone Lookup', accent: _C.teal,
         onTap: _comingSoon, comingSoon: true),
     _ToolItem(icon: Icons.alternate_email_rounded, label: 'Email OSINT', accent: _C.pink,
@@ -174,14 +174,14 @@ class _ToolsPageState extends State<ToolsPage> with TickerProviderStateMixin {
 
   List<_ToolItem> _downloaderItems() => [
     _ToolItem(icon: Icons.video_library_rounded, label: 'TikTok Downloader',    accent: _C.pink,
-        onTap: () => _push(const TiktokDownloaderPage())),
+        onTap: () => _push(TiktokDownloaderPage())),
     _ToolItem(icon: Icons.camera_alt_rounded,    label: 'Instagram Downloader', accent: _C.purple,
-        onTap: () => _push(const InstagramDownloaderPage())),
+        onTap: () => _push(InstagramDownloaderPage())),
   ];
 
   List<_ToolItem> _utilityItems() => [
     _ToolItem(icon: Icons.qr_code_2_rounded,      label: 'QR Generator', accent: _C.teal,
-        onTap: () => _push(const QrGeneratorPage())),
+        onTap: () => _push(QrGeneratorPage())),
     _ToolItem(icon: Icons.security_rounded,        label: 'IP Scanner',   accent: _C.amber,
         onTap: _comingSoon, comingSoon: true),
     _ToolItem(icon: Icons.network_check_rounded,   label: 'Port Scanner', accent: _C.green,
