@@ -3,7 +3,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'chat_ai_page.dart';
-import 'nik_check_page.dart';
 import 'phone_lookup.dart'; 
 import 'subdomain_finder_page.dart';
 import 'anime.dart';

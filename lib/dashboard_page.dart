@@ -19,7 +19,6 @@ import 'package:http/http.dart' as http;
 // ─── Import Pages ─────────────────────────────────────────────────────────
 import 'telegram.dart';
 import 'admin_page.dart';
-import 'owner_page.dart';
 import 'home_page.dart';
 import 'seller_page.dart';
 import 'change_password_page.dart';
@@ -35,10 +34,6 @@ import 'public_page.dart';
 import 'nik_check.dart';
 import 'tools_gateway.dart';
 import 'bug_sender.dart';
-import 'contact_page.dart';
-import 'profile_page.dart';
-import 'riwayat_page.dart';
-import 'info_page.dart';
 
 // ═════════════════════════════════════════════════════════════════════════════
 // ─── COLOR PALETTE (CYBERPUNK + BLUE THEME) ─────────────────────────────────
@@ -498,8 +493,9 @@ Widget _buildNewsPage() {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 80), // Jarak dari AppBar
-        
-        
+        ],
+      ),    
+    );
 
         // ─── 1. BANNER INFORMASI (Bisa Digeser) ──────────────────────────
         SizedBox(

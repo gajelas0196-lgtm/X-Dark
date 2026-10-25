@@ -5,10 +5,6 @@ import 'wifi_internal.dart';
 import 'wifi_external.dart';
 import 'ddos_panel.dart';
 import 'nik_check.dart';
-import 'tiktok_page.dart';
-import 'instagram_page.dart';
-import 'qr_gen.dart';
-import 'domain_page.dart';
 import 'spam_ngl.dart';
 
 // ─── Palette: Biru Tua Metalik ────────────────────────────────────────────────
