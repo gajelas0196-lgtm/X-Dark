@@ -22,7 +22,6 @@ import 'admin_page.dart';
 import 'home_page.dart';
 import 'seller_page.dart';
 import 'change_password_page.dart';
-import 'ddos_page.dart';
 import 'chat_page.dart';
 import 'login_page.dart';
 import 'custom_bug.dart';
@@ -403,10 +402,6 @@ class _DashboardPageState extends State<DashboardPage>
       case 'seller':
         nextIndex = 3;
         nextPage = SellerPage(keyToken: sessionKey);
-        break;
-      case 'ddos':
-        nextIndex = 4;
-        nextPage = ToolsPage(sessionKey: sessionKey, userRole: role);
         break;
       case 'tools':
         nextIndex = 5;
