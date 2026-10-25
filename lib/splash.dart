@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
 
-import 'loader_page.dart';
 
 class SplashPage extends StatefulWidget {
   final Map<String, dynamic> data;
