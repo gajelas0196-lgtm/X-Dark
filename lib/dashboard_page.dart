@@ -147,7 +147,7 @@ class _DashboardPageState extends State<DashboardPage>
   late List<Map<String, dynamic>> listBug, listPayload, listDDoS;
   late List<dynamic> newsList;
 
-  late WebSocketChannel channel;
+  WebSocketChannel? channel;
   String androidId = 'unknown';
   File? _profileImage;
   VideoPlayerController? _menuVideoCtrl;
@@ -230,7 +230,7 @@ class _DashboardPageState extends State<DashboardPage>
 
   @override
   void dispose() {
-    channel.sink.close(status.goingAway);
+    channel?.sink.close(status.goingAway);
     _bgCtrl.dispose();
     _pageCtrl.dispose();
     _menuCtrl.dispose();
@@ -282,15 +282,15 @@ class _DashboardPageState extends State<DashboardPage>
         Uri.parse('ws://kgtau.indocloud.biz.id:10335'),
       );
 
-      channel.sink.add(jsonEncode({
+      jsonEncode(jsonEncode({
         'type': 'validate',
         'key': sessionKey,
         'androidId': androidId,
       }));
 
-      channel.sink.add(jsonEncode({'type': 'stats'}));
+      jsonEncode(jsonEncode({'type': 'stats'}));
 
-      channel.stream.listen(
+      channel?.stream.listen(
         (event) {
           final data = jsonDecode(event);
 
@@ -398,76 +398,76 @@ class _DashboardPageState extends State<DashboardPage>
         nextPage = _buildNewsPage();
         break;
       case 'admin':
-        nextPage = AdminPage(
-          username: username,
-          password: password,
-          role: role,
-          expiredDate: expiredDate,
+        nextPage = AdminPage(sessionKey: sessionKey)
+          
+          
+          
+          
           sessionKey: sessionKey,
         );
         break;
       case 'owner':
-        nextPage = OwnerPage(
-          username: username,
-          password: password,
-          role: role,
-          expiredDate: expiredDate,
+        nextPage = SizedBox()
+          
+          
+          
+          
           sessionKey: sessionKey,
         );
         break;
       case 'seller':
-        nextPage = SellerPage(
-          username: username,
-          password: password,
-          role: role,
-          expiredDate: expiredDate,
+        nextPage = SellerPage(keyToken: sessionKey)
+          
+          
+          
+          
           sessionKey: sessionKey,
         );
         break;
       case 'ddos':
         nextPage = DdosPage(
-          username: username,
-          password: password,
+          
+          
           listDDoS: listDDoS,
-          role: role,
-          expiredDate: expiredDate,
+          
+          
           sessionKey: sessionKey,
         );
         break;
       case 'tools':
         nextPage = ToolsGateway(
-          username: username,
-          password: password,
-          role: role,
-          expiredDate: expiredDate,
+          
+          
+          
+          
           sessionKey: sessionKey,
         );
         break;
       case 'bug':
         nextPage = AttackPage(
-          username: username,
-          password: password,
+          
+          
           listBug: listBug,
-          role: role,
-          expiredDate: expiredDate,
+          
+          
           sessionKey: sessionKey,
         );
         break;
       case 'profile':
-        nextPage = ProfilePage(
-          username: username,
-          password: password,
-          role: role,
-          expiredDate: expiredDate,
+        nextPage = SizedBox()
+          
+          
+          
+          
           sessionKey: sessionKey,
         );
         break;
       case 'settings':
-        nextPage = ChangePasswordPage(
-          username: username,
-          password: password,
-          role: role,
-          expiredDate: expiredDate,
+        nextPage = ChangePasswordPage(sessionKey: sessionKey)
+          
+          
+          
+          
           sessionKey: sessionKey,
         );
         break;
@@ -737,7 +737,7 @@ class _DashboardPageState extends State<DashboardPage>
                 border: Border.all(color: _Color.border),
               ),
               child: Text(
-                'ID: ${androidId.substring(0, 8)}',
+                'ID: ${androidId.length >= 8 ? androidId.substring(0, 8) : androidId}',
                 style: const TextStyle(
                   color: _Color.textSub,
                   fontSize: 10,
