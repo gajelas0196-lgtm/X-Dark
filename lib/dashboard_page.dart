@@ -406,24 +406,11 @@ class _DashboardPageState extends State<DashboardPage>
         break;
       case 'ddos':
         nextIndex = 4;
-        nextPage = DdosPage(
-          username: username,
-          password: password,
-          listDDoS: listDDoS,
-          role: role,
-          expiredDate: expiredDate,
-          sessionKey: sessionKey,
-        );
+        nextPage = ToolsPage(sessionKey: sessionKey);
         break;
       case 'tools':
         nextIndex = 5;
-        nextPage = ToolsGatewayPage(
-          username: username,
-          password: password,
-          role: role,
-          expiredDate: expiredDate,
-          sessionKey: sessionKey,
-        );
+        nextPage = ToolsGatewayPage(sessionKey: sessionKey, userRole: role);
         break;
       case 'bug':
         nextIndex = 6;

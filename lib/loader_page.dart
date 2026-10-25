@@ -248,7 +248,7 @@ class _DashboardPageState extends State<DashboardPage> with SingleTickerProvider
     } else if (page == 'ddos') {
       nextWidget = AttackPanel(sessionKey: sessionKey, listDDoS: listDDoS);
     } else if (page == 'tools') {
-      nextWidget = ToolsPage(sessionKey: sessionKey, userRole: role);
+      nextWidget = ToolsGatewayPage(sessionKey: sessionKey, userRole: role);
     } else if (page == 'reseller') {
       nextWidget = SellerPage(keyToken: sessionKey);
     } else if (page == 'admin') {
