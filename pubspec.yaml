@@ -15,7 +15,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   shared_preferences: ^2.2.2
   device_info_plus: ^10.1.0
-  carousel_slider: 4.0.0
+  carousel_slider: ^4.2.1      # ✅ UBAH DARI 4.0.0 KE ^4.2.1
   web_socket_channel: ^2.4.0
   network_info_plus: ^4.1.0
   permission_handler: ^11.0.0
