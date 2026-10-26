@@ -19,11 +19,9 @@ import 'package:http/http.dart' as http;
 // ─── Import Pages ─────────────────────────────────────────────────────────
 import 'telegram.dart';
 import 'admin_page.dart';
-// import 'owner_page.dart';
 import 'home_page.dart';
 import 'seller_page.dart';
 import 'change_password_page.dart';
-// import 'ddos_page.dart';
 import 'chat_page.dart';
 import 'login_page.dart';
 import 'custom_bug.dart';
@@ -35,45 +33,35 @@ import 'public_page.dart';
 import 'nik_check.dart';
 import 'tools_gateway.dart';
 import 'bug_sender.dart';
-// import 'contact_page.dart';
-// import 'profile_page.dart';
-// import 'riwayat_page.dart';
-// import 'info_page.dart';
 
 // ═════════════════════════════════════════════════════════════════════════════
 // ─── COLOR PALETTE (CYBERPUNK + BLUE THEME) ─────────────────────────────────
 // ═════════════════════════════════════════════════════════════════════════════
 
 class _Color {
-  // Background & Surface
-  static const bg        = Color(0xFF060B14);      // Ultra dark bg
-  static const surface   = Color(0xFF0C1424);      // Panel surface
-  static const card      = Color(0xFF101A2E);      // Card bg
-  static const border    = Color(0xFF1A2D4A);      // Border color
-  static const borderLit = Color(0xFF1E3A5F);      // Border highlight
+  static const bg        = Color(0xFF060B14);
+  static const surface   = Color(0xFF0C1424);
+  static const card      = Color(0xFF101A2E);
+  static const border    = Color(0xFF1A2D4A);
+  static const borderLit = Color(0xFF1E3A5F);
 
-  // Primary Colors (Blue theme)
-  static const blue      = Color(0xFF1B6FBD);      // Primary blue
-  static const blueMid   = Color(0xFF2D8FE8);      // Mid blue
-  static const blueLight = Color(0xFF56AEF5);      // Light blue
-  static const blueFrost = Color(0xFF90CEF7);      // Frost blue
+  static const blue      = Color(0xFF1B6FBD);
+  static const blueMid   = Color(0xFF2D8FE8);
+  static const blueLight = Color(0xFF56AEF5);
+  static const blueFrost = Color(0xFF90CEF7);
 
-  // Accent Colors (Cyberpunk theme)
-  static const primary   = Color(0xFFB04AFF);      // Violet neon
-  static const accent    = Color(0xFFFF2D78);      // Pink accent
-  static const accentBlue= Color(0xFF00C8FF);      // Cyan
+  static const primary   = Color(0xFFB04AFF);
+  static const accent    = Color(0xFFFF2D78);
+  static const accentBlue= Color(0xFF00C8FF);
 
-  // Status Colors
-  static const green     = Color(0xFF22C55E);      // Success
-  static const amber     = Color(0xFFF59E0B);      // Warning
-  static const red       = Color(0xFFEF4444);      // Error
+  static const green     = Color(0xFF22C55E);
+  static const amber     = Color(0xFFF59E0B);
+  static const red       = Color(0xFFEF4444);
 
-  // Text Colors
-  static const text      = Color(0xFFE2EDF9);      // Primary text
-  static const textSub   = Color(0xFF7A9BBF);      // Secondary text
-  static const textDim   = Color(0xFF3A5470);      // Dimmed text
+  static const text      = Color(0xFFE2EDF9);
+  static const textSub   = Color(0xFF7A9BBF);
+  static const textDim   = Color(0xFF3A5470);
 
-  // Gradients
   static const LinearGradient btnGrad = LinearGradient(
     colors: [blueMid, blueLight],
     begin: Alignment.topLeft,
@@ -277,45 +265,45 @@ class _DashboardPageState extends State<DashboardPage>
   }
 
   void _connectWebSocket() {
-  try {
-    channel = WebSocketChannel.connect(
-      Uri.parse('ws://alfa-store-officials.alfamarket2.my.id:3505'),
-    );
+    try {
+      channel = WebSocketChannel.connect(
+        Uri.parse('ws://alfa-store-officials.alfamarket2.my.id:3505'),
+      );
 
-    channel?.sink.add(jsonEncode({
-      'type': 'validate',
-      'key': sessionKey,
-      'androidId': androidId,
-    }));
+      channel?.sink.add(jsonEncode({
+        'type': 'validate',
+        'key': sessionKey,
+        'androidId': androidId,
+      }));
 
-    channel?.sink.add(jsonEncode({'type': 'stats'}));
+      channel?.sink.add(jsonEncode({'type': 'stats'}));
 
-    channel?.stream.listen(
-      (event) { // <--- INI HARUS (event) {
-        final data = jsonDecode(event);
+      channel?.stream.listen(
+        (event) {
+          final data = jsonDecode(event);
 
-        if (data['type'] == 'myInfo' && data['valid'] == false) {
-          final reason = data['reason'];
-          _handleInvalidSession(
-            reason == 'androidIdMismatch'
-                ? 'Akun ini login di perangkat lain.'
-                : 'Sesi tidak valid. Silakan login ulang.',
-          );
-        }
+          if (data['type'] == 'myInfo' && data['valid'] == false) {
+            final reason = data['reason'];
+            _handleInvalidSession(
+              reason == 'androidIdMismatch'
+                  ? 'Akun ini login di perangkat lain.'
+                  : 'Sesi tidak valid. Silakan login ulang.',
+            );
+          }
 
-        if (data['type'] == 'stats' && mounted) {
-          setState(() {
-            onlineUsers = data['onlineUsers'] ?? 0;
-            activeConns = data['activeConnections'] ?? 0;
-          });
-        }
-      },
-      cancelOnError: true,
-    );
-  } catch (e) {
-    debugPrint('WebSocket error: $e');
+          if (data['type'] == 'stats' && mounted) {
+            setState(() {
+              onlineUsers = data['onlineUsers'] ?? 0;
+              activeConns = data['activeConnections'] ?? 0;
+            });
+          }
+        },
+        cancelOnError: true,
+      );
+    } catch (e) {
+      debugPrint('WebSocket error: $e');
+    }
   }
-}
 
   Future<void> _openUrl(String url) async {
     await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
@@ -393,49 +381,49 @@ class _DashboardPageState extends State<DashboardPage>
     int nextIndex = _navIndex;
 
     switch (item) {
-  case 'home':
-    nextIndex = 0;
-    nextPage = _buildNewsPage();
-    break;
-  case 'admin':
-    nextPage = AdminPage(
-      sessionKey: sessionKey, // Hanya butuh sessionKey
-    );
-    break;
-  case 'seller':
-    nextPage = SellerPage(
-      keyToken: sessionKey, // Hanya butuh keyToken
-    );
-    break;
-  case 'tools':
-    nextPage = ToolsGateway(
-      username: username,
-      password: password,
-      role: role,
-      expiredDate: expiredDate,
-      sessionKey: sessionKey,
-    );
-    break;
-  case 'bug':
-    nextPage = AttackPage(
-      username: username,
-      password: password,
-      listBug: listBug,
-      role: role,
-      expiredDate: expiredDate,
-      sessionKey: sessionKey,
-    );
-    break;
-  case 'settings':
-    nextPage = ChangePasswordPage(
-      username: username,
-      // password: password, <--- HAPUS BARIS INI
-      role: role,
-      expiredDate: expiredDate,
-      sessionKey: sessionKey,
-    );
-    break;
-}
+      case 'home':
+        nextIndex = 0;
+        nextPage = _buildNewsPage();
+        break;
+      case 'admin':
+        nextPage = AdminPage(
+          sessionKey: sessionKey,
+        );
+        break;
+      case 'seller':
+        nextPage = SellerPage(
+          keyToken: sessionKey,
+        );
+        break;
+      case 'tools':
+        nextPage = ToolsGateway(
+          username: username,
+          password: password,
+          role: role,
+          expiredDate: expiredDate,
+          sessionKey: sessionKey,
+        );
+        break;
+      case 'bug':
+        nextPage = AttackPage(
+          username: username,
+          password: password,
+          listBug: listBug,
+          role: role,
+          expiredDate: expiredDate,
+          sessionKey: sessionKey,
+        );
+        break;
+      case 'settings':
+        nextPage = ChangePasswordPage(
+          username: username,
+          role: role,
+          expiredDate: expiredDate,
+          sessionKey: sessionKey,
+        );
+        break;
+    }
+
     _navigateTo(nextIndex, page: nextPage);
   }
 
@@ -452,9 +440,10 @@ class _DashboardPageState extends State<DashboardPage>
     );
   }
 
-  // ═════════════════════════════════════════════════════════════════════════
+    // ═════════════════════════════════════════════════════════════════════════
   // ─── BUILD METHODS ────────────────────────────────────────────────────────
   // ═════════════════════════════════════════════════════════════════════════
+
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
@@ -476,14 +465,19 @@ class _DashboardPageState extends State<DashboardPage>
         drawer: _buildDrawer(),
         body: Stack(
           children: [
+            // ─ Animated Background
             Positioned.fill(
               child: _AnimatedBg(controller: _bgCtrl),
             ),
+
+            // ─ Scanlines
             Positioned.fill(
               child: IgnorePointer(
                 child: CustomPaint(painter: _ScanlinePainter()),
               ),
             ),
+
+            // ─ Body
             SafeArea(
               top: false,
               bottom: false,
@@ -495,6 +489,8 @@ class _DashboardPageState extends State<DashboardPage>
                 ),
               ),
             ),
+
+            // ─ Header (Home only)
             if (_navIndex == 0)
               Positioned(
                 top: 0,
@@ -502,6 +498,8 @@ class _DashboardPageState extends State<DashboardPage>
                 right: 0,
                 child: _buildHeader(),
               ),
+
+            // ─ Floating Button
             Positioned(
               left: _assistiveTouchPosition.dx,
               top: _assistiveTouchPosition.dy,
@@ -576,6 +574,8 @@ class _DashboardPageState extends State<DashboardPage>
                 ),
               ),
             ),
+
+            // ─ Floating Menu
             if (_isAssistiveMenuOpen)
               Positioned.fill(
                 child: GestureDetector(
@@ -588,6 +588,7 @@ class _DashboardPageState extends State<DashboardPage>
                   child: Container(color: Colors.transparent),
                 ),
               ),
+
             AnimatedPositioned(
               duration: const Duration(milliseconds: 150),
               left: isRightSide
@@ -706,6 +707,7 @@ class _DashboardPageState extends State<DashboardPage>
       backgroundColor: _Color.surface,
       child: ListView(
         children: [
+          // ─ Drawer Header with Video
           Container(
             height: 180,
             decoration: BoxDecoration(
@@ -768,6 +770,8 @@ class _DashboardPageState extends State<DashboardPage>
               ],
             ),
           ),
+
+          // ─ Menu Items
           _buildDrawerItem(
             Icons.home_rounded,
             'Beranda',
@@ -1031,497 +1035,6 @@ class _NewsMediaState extends State<NewsMedia> {
     }
   }
 
-  bool _isVideo(String url) {
-    return url.endsWith('.mp4') ||
-        url.endsWith('.webm') ||
-        url.endsWith('.mov') ||
-        url.endsWith('.mkv');
-  }
-
-  @override
-  void dispose() {
-    _controller?.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    if (_isVideo(widget.url)) {
-      if (_controller != null && _controller!.value.isInitialized) {
-        return AspectRatio(
-          aspectRatio: _controller!.value.aspectRatio,
-          child: VideoPlayer(_controller!),
-        );
-      } else {
-        return Container(
-          color: _Color.surface,
-          child: const Center(
-            child: SizedBox(
-              width: 20,
-              height: 20,
-              child: CircularProgressIndicator(
-                color: _Color.primary,
-                strokeWidth: 2,
-              ),
-            ),
-          ),
-        );
-      }
-    } else {
-      return Image.network(
-        widget.url,
-        fit: BoxFit.cover,
-        errorBuilder: (_, __, ___) => Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                _Color.primary.withOpacity(0.2),
-                _Color.accent.withOpacity(0.1)
-              ],
-            ),
-          ),
-        ),
-      );
-    }
-  }
-}
-
-            // ─ Floating Menu
-            if (_isAssistiveMenuOpen)
-              Positioned.fill(
-                child: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      _isAssistiveMenuOpen = false;
-                      _isBugToolsExpanded = false;
-                    });
-                  },
-                  child: Container(color: Colors.transparent),
-                ),
-              ),
-
-            AnimatedPositioned(
-              duration: const Duration(milliseconds: 150),
-              left: isRightSide
-                  ? _assistiveTouchPosition.dx - 250
-                  : _assistiveTouchPosition.dx + 70,
-              top: isBottomSide
-                  ? _assistiveTouchPosition.dy - 350
-                  : _assistiveTouchPosition.dy,
-              child: AnimatedScale(
-                scale: _isAssistiveMenuOpen ? 1.0 : 0.0,
-                duration: const Duration(milliseconds: 250),
-                curve: Curves.easeOutBack,
-                alignment: isRightSide
-                    ? (isBottomSide ? Alignment.bottomRight : Alignment.topRight)
-                    : (isBottomSide ? Alignment.bottomLeft : Alignment.topLeft),
-                child: _buildFloatingMenu(),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildHeader() {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [_Color.bg, _Color.bg.withOpacity(0.8)],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: _Color.blue.withOpacity(0.1),
-            blurRadius: 10,
-          ),
-        ],
-      ),
-      child: SafeArea(
-        bottom: false,
-        child: Row(
-          children: [
-            GestureDetector(
-              onTap: () => _scaffoldKey.currentState?.openDrawer(),
-              child: Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: _Color.surface,
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: _Color.border),
-                ),
-                child: const Icon(
-                  Icons.menu_rounded,
-                  color: _Color.textSub,
-                  size: 20,
-                ),
-              ),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Welcome, $username',
-                    style: const TextStyle(
-                      color: _Color.text,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14,
-                      fontFamily: 'Rajdhani',
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      Icon(_roleIcon(role), size: 12, color: _roleColor(role)),
-                      const SizedBox(width: 4),
-                      Text(
-                        role.toUpperCase(),
-                        style: TextStyle(
-                          color: _roleColor(role),
-                          fontSize: 10,
-                          fontFamily: 'Rajdhani',
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-              decoration: BoxDecoration(
-                color: _Color.surface,
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: _Color.border),
-              ),
-              child: Text(
-                'ID: ${androidId.substring(0, 8)}',
-                style: const TextStyle(
-                  color: _Color.textSub,
-                  fontSize: 10,
-                  fontFamily: 'Rajdhani',
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildDrawer() {
-    return Drawer(
-      backgroundColor: _Color.surface,
-      child: ListView(
-        children: [
-          // ─ Drawer Header with Video
-          Container(
-            height: 180,
-            decoration: BoxDecoration(
-              gradient: _Color.primaryGrad,
-              border: Border(bottom: BorderSide(color: _Color.border)),
-            ),
-            child: Stack(
-              children: [
-                if (_menuVideoCtrl?.value.isInitialized == true)
-                  VideoPlayer(_menuVideoCtrl!)
-                else
-                  Container(
-                    color: _Color.card,
-                    child: const Center(
-                      child: CircularProgressIndicator(
-                        color: _Color.primary,
-                        strokeWidth: 2,
-                      ),
-                    ),
-                  ),
-                Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Colors.transparent,
-                        _Color.surface.withOpacity(0.9),
-                      ],
-                    ),
-                  ),
-                ),
-                Positioned(
-                  bottom: 12,
-                  left: 16,
-                  right: 16,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        username,
-                        style: const TextStyle(
-                          color: _Color.text,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                          fontFamily: 'Rajdhani',
-                        ),
-                      ),
-                      Text(
-                        'Exp: $expiredDate',
-                        style: const TextStyle(
-                          color: _Color.textSub,
-                          fontSize: 12,
-                          fontFamily: 'Rajdhani',
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-
-          // ─ Menu Items
-          if (role.toLowerCase() == 'owner')
-  _buildDrawerItem(
-    Icons.workspace_premium_rounded,
-    'Owner Panel',
-    'owner',
-  ),
-// ...
-_buildDrawerItem(
-  Icons.cloud_off_rounded,
-  'DDoS Panel',
-  'ddos',
-),
-_buildDrawerItem(
-  Icons.person_rounded,
-  'Profile',
-  'profile',
-),
-  Widget _buildDrawerItem(
-    IconData icon,
-    String label,
-    String action, {
-    Color color = _Color.textSub,
-    bool isActive = false,
-  }) {
-    return ListTile(
-      leading: Icon(icon, color: isActive ? _Color.primary : color, size: 20),
-      title: Text(
-        label,
-        style: TextStyle(
-          color: isActive ? _Color.primary : _Color.text,
-          fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
-          fontFamily: 'Rajdhani',
-        ),
-      ),
-      onTap: () {
-        Navigator.pop(context);
-        if (action == 'logout') {
-          _handleLogout();
-        } else {
-          _selectFromMenu(action);
-        }
-      },
-      hoverColor: _Color.card,
-      selectedTileColor: _Color.card,
-    );
-  }
-
-  Widget _buildFloatingMenu() {
-    return Container(
-      padding: const EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        color: _Color.surface,
-        border: Border.all(color: _Color.border),
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: _Color.primary.withOpacity(0.2),
-            blurRadius: 10,
-          ),
-        ],
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _buildFloatingMenuItem(
-            Icons.home_rounded,
-            'Home',
-            () => _selectFromMenu('home'),
-          ),
-          _buildFloatingMenuItem(
-            Icons.person_rounded,
-            'Profile',
-            () => _selectFromMenu('profile'),
-          ),
-          _buildFloatingMenuItem(
-            Icons.lock_rounded,
-            'Settings',
-            () => _selectFromMenu('settings'),
-          ),
-          const Divider(color: _Color.border, height: 8),
-          _buildFloatingMenuItem(
-            Icons.logout_rounded,
-            'Logout',
-            _handleLogout,
-            color: _Color.red,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildFloatingMenuItem(
-    IconData icon,
-    String label,
-    VoidCallback onTap, {
-    Color color = _Color.blueLight,
-  }) {
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(8),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(icon, color: color, size: 18),
-              const SizedBox(width: 8),
-              Text(
-                label,
-                style: TextStyle(
-                  color: color,
-                  fontFamily: 'Rajdhani',
-                  fontSize: 12,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  void _handleLogout() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.clear();
-
-    if (!mounted) return;
-    Navigator.of(context).pushAndRemoveUntil(
-      MaterialPageRoute(builder: (_) => const LoginPage()),
-      (route) => false,
-    );
-  }
-}
-
-// ═════════════════════════════════════════════════════════════════════════════
-// ─── PAINTER & HELPER CLASSES ─────────────────────────────────────────────────
-// ═════════════════════════════════════════════════════════════════════════════
-
-class _ScanlinePainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()..color = Colors.white.withOpacity(0.012);
-    for (double y = 0; y < size.height; y += 4) {
-      canvas.drawRect(Rect.fromLTWH(0, y, size.width, 1.5), paint);
-    }
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
-}
-
-class _AnimatedBg extends StatelessWidget {
-  final AnimationController controller;
-  const _AnimatedBg({required this.controller});
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: controller,
-      builder: (_, __) => CustomPaint(painter: _BgPainter(controller.value)),
-    );
-  }
-}
-
-class _BgPainter extends CustomPainter {
-  final double t;
-  _BgPainter(this.t);
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    // Grid background
-    final grid = Paint()
-      ..color = _Color.border.withOpacity(0.25)
-      ..strokeWidth = 0.5;
-
-    const step = 38.0;
-    for (double x = 0; x < size.width; x += step) {
-      canvas.drawLine(Offset(x, 0), Offset(x, size.height), grid);
-    }
-    for (double y = 0; y < size.height; y += step) {
-      canvas.drawLine(Offset(0, y), Offset(size.width, y), grid);
-    }
-
-    // Animated glow
-    final glow = Paint()
-      ..shader = RadialGradient(
-        colors: [
-          _Color.blue.withOpacity(0.10 + math.sin(t * math.pi * 2) * 0.03),
-          Colors.transparent,
-        ],
-        radius: 0.9,
-      ).createShader(
-        Rect.fromCircle(
-          center: Offset(size.width / 2, 0),
-          radius: size.width,
-        ),
-      );
-    canvas.drawCircle(Offset(size.width / 2, 0), size.width, glow);
-  }
-
-  @override
-  bool shouldRepaint(_BgPainter old) => old.t != t;
-}
-
-// ═════════════════════════════════════════════════════════════════════════════
-// ─── NEWS MEDIA WIDGET ─────────────────────────────────────────────────────────
-// ═════════════════════════════════════════════════════════════════════════════
-
-class NewsMedia extends StatefulWidget {
-  final String url;
-  const NewsMedia({super.key, required this.url});
-
-  @override
-  State<NewsMedia> createState() => _NewsMediaState();
-}
-
-class _NewsMediaState extends State<NewsMedia> {
-  VideoPlayerController? _controller;
-
-  @override
-void initState() {
-  super.initState();
-  if (_isVideo(widget.url)) {
-    try {
-      _controller = VideoPlayerController.networkUrl(Uri.parse(widget.url))
-        ..initialize().then((_) {
-          if (mounted) setState(() {}); // Tambahkan if (mounted)
-          _controller?.setLooping(true);
-          _controller?.play();
-        }).catchError((error) {
-          debugPrint('Gagal memuat video: $error');
-        });
-    } catch (e) {
-      debugPrint('Error inisialisasi video: $e');
-    }
-  }
-}
   bool _isVideo(String url) {
     return url.endsWith('.mp4') ||
         url.endsWith('.webm') ||
