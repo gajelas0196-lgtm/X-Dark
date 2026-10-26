@@ -7,18 +7,18 @@ class BuyAccountPage extends StatelessWidget {
   final List<Map<String, String>> priceList = const [
     {
       "title": "Member Account",
-      "monthly": "14,9K IDR / Month",
-      "permanent": "19,5 IDR / Permanent",
+      "monthly": "10K IDR / Month",
+      "permanent": "20k IDR / Permanent",
     },
     {
       "title": "Reseller Account",
-      "monthly": "35K IDR / Month",
-      "permanent": "19,5K IDR / Permanent",
+      "monthly": "25K IDR / Month",
+      "permanent": "40K IDR / Permanent",
     },
     {
       "title": "VIP Account",
-      "monthly": "70k IDR / Month",
-      "permanent": "140k IDR / Permanent",
+      "monthly": "40k IDR / Month",
+      "permanent": "90k IDR / Permanent",
     },
   ];
 
