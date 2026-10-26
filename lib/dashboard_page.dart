@@ -416,7 +416,7 @@ class _DashboardPageState extends State<DashboardPage>
         break;
       case 'settings':
         nextPage = ChangePasswordPage(
-       //   username: username,
+          username: username,
        //   role: role,
        //   expiredDate: expiredDate,
           sessionKey: sessionKey,
