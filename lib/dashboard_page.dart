@@ -417,7 +417,7 @@ class _DashboardPageState extends State<DashboardPage>
       case 'settings':
         nextPage = ChangePasswordPage(
           username: username,
-          role: role,
+       //   role: role,
           expiredDate: expiredDate,
           sessionKey: sessionKey,
         );
