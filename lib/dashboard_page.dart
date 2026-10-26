@@ -19,11 +19,11 @@ import 'package:http/http.dart' as http;
 // ─── Import Pages ─────────────────────────────────────────────────────────
 import 'telegram.dart';
 import 'admin_page.dart';
-import 'owner_page.dart';
+// import 'owner_page.dart';
 import 'home_page.dart';
 import 'seller_page.dart';
 import 'change_password_page.dart';
-import 'ddos_page.dart';
+// import 'ddos_page.dart';
 import 'chat_page.dart';
 import 'login_page.dart';
 import 'custom_bug.dart';
@@ -35,10 +35,10 @@ import 'public_page.dart';
 import 'nik_check.dart';
 import 'tools_gateway.dart';
 import 'bug_sender.dart';
-import 'contact_page.dart';
-import 'profile_page.dart';
-import 'riwayat_page.dart';
-import 'info_page.dart';
+// import 'contact_page.dart';
+// import 'profile_page.dart';
+// import 'riwayat_page.dart';
+// import 'info_page.dart';
 
 // ═════════════════════════════════════════════════════════════════════════════
 // ─── COLOR PALETTE (CYBERPUNK + BLUE THEME) ─────────────────────────────────
@@ -393,86 +393,49 @@ class _DashboardPageState extends State<DashboardPage>
     int nextIndex = _navIndex;
 
     switch (item) {
-      case 'home':
-        nextIndex = 0;
-        nextPage = _buildNewsPage();
-        break;
-      case 'admin':
-        nextPage = AdminPage(
-          username: username,
-          password: password,
-          role: role,
-          expiredDate: expiredDate,
-          sessionKey: sessionKey,
-        );
-        break;
-      case 'owner':
-        nextPage = OwnerPage(
-          username: username,
-          password: password,
-          role: role,
-          expiredDate: expiredDate,
-          sessionKey: sessionKey,
-        );
-        break;
-      case 'seller':
-        nextPage = SellerPage(
-          username: username,
-          password: password,
-          role: role,
-          expiredDate: expiredDate,
-          sessionKey: sessionKey,
-        );
-        break;
-      case 'ddos':
-        nextPage = DdosPage(
-          username: username,
-          password: password,
-          listDDoS: listDDoS,
-          role: role,
-          expiredDate: expiredDate,
-          sessionKey: sessionKey,
-        );
-        break;
-      case 'tools':
-        nextPage = ToolsGateway(
-          username: username,
-          password: password,
-          role: role,
-          expiredDate: expiredDate,
-          sessionKey: sessionKey,
-        );
-        break;
-      case 'bug':
-        nextPage = AttackPage(
-          username: username,
-          password: password,
-          listBug: listBug,
-          role: role,
-          expiredDate: expiredDate,
-          sessionKey: sessionKey,
-        );
-        break;
-      case 'profile':
-        nextPage = ProfilePage(
-          username: username,
-          password: password,
-          role: role,
-          expiredDate: expiredDate,
-          sessionKey: sessionKey,
-        );
-        break;
-      case 'settings':
-        nextPage = ChangePasswordPage(
-          username: username,
-          password: password,
-          role: role,
-          expiredDate: expiredDate,
-          sessionKey: sessionKey,
-        );
-        break;
-    }
-
+  case 'home':
+    nextIndex = 0;
+    nextPage = _buildNewsPage();
+    break;
+  case 'admin':
+    nextPage = AdminPage(
+      sessionKey: sessionKey, // Hanya butuh sessionKey
+    );
+    break;
+  case 'seller':
+    nextPage = SellerPage(
+      keyToken: sessionKey, // Hanya butuh keyToken
+    );
+    break;
+  case 'tools':
+    nextPage = ToolsGateway(
+      username: username,
+      password: password,
+      role: role,
+      expiredDate: expiredDate,
+      sessionKey: sessionKey,
+    );
+    break;
+  case 'bug':
+    nextPage = AttackPage(
+      username: username,
+      password: password,
+      listBug: listBug,
+      role: role,
+      expiredDate: expiredDate,
+      sessionKey: sessionKey,
+    );
+    break;
+  case 'settings':
+    nextPage = ChangePasswordPage(
+      username: username,
+      // password: password, <--- HAPUS BARIS INI
+      role: role,
+      expiredDate: expiredDate,
+      sessionKey: sessionKey,
+    );
+    break;
+}
     _navigateTo(nextIndex, page: nextPage);
   }
 
@@ -821,67 +784,23 @@ class _DashboardPageState extends State<DashboardPage>
           ),
 
           // ─ Menu Items
-          _buildDrawerItem(
-            Icons.home_rounded,
-            'Beranda',
-            'home',
-            isActive: _navIndex == 0,
-          ),
-          if (role.toLowerCase() == 'admin' || role.toLowerCase() == 'owner')
-            _buildDrawerItem(
-              Icons.admin_panel_settings_rounded,
-              'Admin Panel',
-              'admin',
-            ),
           if (role.toLowerCase() == 'owner')
-            _buildDrawerItem(
-              Icons.workspace_premium_rounded,
-              'Owner Panel',
-              'owner',
-            ),
-          if (role.toLowerCase() == 'reseller')
-            _buildDrawerItem(
-              Icons.storefront_rounded,
-              'Seller Panel',
-              'seller',
-            ),
-          _buildDrawerItem(
-            Icons.bug_report_rounded,
-            'Attack Tools',
-            'bug',
-          ),
-          _buildDrawerItem(
-            Icons.cloud_off_rounded,
-            'DDoS Panel',
-            'ddos',
-          ),
-          _buildDrawerItem(
-            Icons.construction_rounded,
-            'Tools Gateway',
-            'tools',
-          ),
-          _buildDrawerItem(
-            Icons.person_rounded,
-            'Profile',
-            'profile',
-          ),
-          _buildDrawerItem(
-            Icons.lock_rounded,
-            'Settings',
-            'settings',
-          ),
-          const Divider(color: _Color.border),
-          _buildDrawerItem(
-            Icons.logout_rounded,
-            'Logout',
-            'logout',
-            color: _Color.red,
-          ),
-        ],
-      ),
-    );
-  }
-
+  _buildDrawerItem(
+    Icons.workspace_premium_rounded,
+    'Owner Panel',
+    'owner',
+  ),
+// ...
+_buildDrawerItem(
+  Icons.cloud_off_rounded,
+  'DDoS Panel',
+  'ddos',
+),
+_buildDrawerItem(
+  Icons.person_rounded,
+  'Profile',
+  'profile',
+),
   Widget _buildDrawerItem(
     IconData icon,
     String label,
