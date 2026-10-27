@@ -14,7 +14,7 @@ class PublicChatPage extends StatefulWidget {
 
 class _PublicChatPageState extends State<PublicChatPage> {
   // --- KONFIGURASI URL SERVER ---
-  final String baseUrl = "http://alfa-store-officials.alfamarket2.my.id:3771"; 
+  final String baseUrl = "http://alfa-store-officials.alfamarket2.my.id:3505"; 
 
   // Controllers
   final TextEditingController _msgController = TextEditingController();

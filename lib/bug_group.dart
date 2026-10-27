@@ -1,7 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:video_player/video_player.dart';
 import 'dart:ui';
@@ -28,7 +27,7 @@ class GroupBugPage extends StatefulWidget {
 
 class _GroupBugPageState extends State<GroupBugPage> with TickerProviderStateMixin {
   final linkGroupController = TextEditingController();
-  static const String baseUrl = "http://alfa-store-officials.alfamarket2.my.id:3771";
+  static const String baseUrl = "http://alfa-store-officials.alfamarket2.my.id:3505";
 
   late AnimationController _buttonController;
   late AnimationController _glowController;
@@ -164,7 +163,7 @@ class _GroupBugPageState extends State<GroupBugPage> with TickerProviderStateMix
             children: [
               Container(
                 width: 60, height: 60,
-                decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: _themeColor, width: 2), image: const DecorationImage(image: AssetImage('assets/images/http://alfa-store-officials.alfamarket2.my.id:3771.png'), fit: BoxFit.cover)),
+                decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: _themeColor, width: 2), image: const DecorationImage(image: AssetImage('assets/images/http://alfa-store-officials.alfamarket2.my.id:3505.png'), fit: BoxFit.cover)),
               ),
               Positioned(
                 bottom: -5, left: 10, right: 10,
@@ -184,7 +183,7 @@ class _GroupBugPageState extends State<GroupBugPage> with TickerProviderStateMix
             ]),
           ),
           const Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-            Text("http://alfa-store-officials.alfamarket2.my.id:3771", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 14, fontFamily: 'Rajdhani')),
+            Text("http://alfa-store-officials.alfamarket2.my.id:3505", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 14, fontFamily: 'Rajdhani')),
             Text("GROUP-BUG", style: TextStyle(color: Colors.white38, fontSize: 8, fontFamily: 'Rajdhani')),
           ]),
         ],

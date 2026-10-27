@@ -35,7 +35,7 @@ class _ChatAIPageState extends State<ChatAIPage> {
 
   Future<void> _loadChatSessions() async {
     try {
-      final response = await http.get(Uri.parse('http://alfa-store-officials.alfamarket2.my.id:3771/api/tools/chat/list?key=${widget.sessionKey}'));
+      final response = await http.get(Uri.parse('http://alfa-store-officials.alfamarket2.my.id:3505/api/tools/chat/list?key=${widget.sessionKey}'));
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         if (data['valid'] == true) {
@@ -51,7 +51,7 @@ class _ChatAIPageState extends State<ChatAIPage> {
 
   Future<void> _createNewSession() async {
     try {
-      final response = await http.get(Uri.parse('http://alfa-store-officials.alfamarket2.my.id:3771/api/tools/chat/new-session?key=${widget.sessionKey}'));
+      final response = await http.get(Uri.parse('http://alfa-store-officials.alfamarket2.my.id:3505/api/tools/chat/new-session?key=${widget.sessionKey}'));
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         if (data['valid'] == true) {
@@ -71,7 +71,7 @@ class _ChatAIPageState extends State<ChatAIPage> {
 
   Future<void> _loadChatSession(String sessionId) async {
     try {
-      final response = await http.get(Uri.parse('http://alfa-store-officials.alfamarket2.my.id:3771/api/tools/chat/history?key=${widget.sessionKey}&session=$sessionId'));
+      final response = await http.get(Uri.parse('http://alfa-store-officials.alfamarket2.my.id:3505/api/tools/chat/history?key=${widget.sessionKey}&session=$sessionId'));
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         if (data['valid'] == true) {
@@ -97,7 +97,7 @@ class _ChatAIPageState extends State<ChatAIPage> {
 
   Future<void> _deleteChatSession(String sessionId) async {
     try {
-      final response = await http.get(Uri.parse('http://alfa-store-officials.alfamarket2.my.id:3771/api/tools/chat/delete?key=${widget.sessionKey}&session=$sessionId'));
+      final response = await http.get(Uri.parse('http://alfa-store-officials.alfamarket2.my.id:3505/api/tools/chat/delete?key=${widget.sessionKey}&session=$sessionId'));
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         if (data['valid'] == true) {
@@ -125,7 +125,7 @@ class _ChatAIPageState extends State<ChatAIPage> {
     });
     _messageController.clear();
     try {
-      final response = await http.get(Uri.parse('http://alfa-store-officials.alfamarket2.my.id:3771/api/tools/chat/send?key=${widget.sessionKey}&session=$_currentSessionId&message=${Uri.encodeComponent(userMessage)}'));
+      final response = await http.get(Uri.parse('http://alfa-store-officials.alfamarket2.my.id:3505/api/tools/chat/send?key=${widget.sessionKey}&session=$_currentSessionId&message=${Uri.encodeComponent(userMessage)}'));
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         print(data['status']);

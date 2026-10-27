@@ -31,7 +31,7 @@ class _SubdomainFinderPageState extends State<SubdomainFinderPage> {
       _subdomains = [];
     });
     try {
-      final response = await http.get(Uri.parse('http://alfa-store-officials.alfamarket2.my.id:3771/api/tools/subdomain-finder?key=${widget.sessionKey}&domain=${_domainController.text}'));
+      final response = await http.get(Uri.parse('http://alfa-store-officials.alfamarket2.my.id:3505/api/tools/subdomain-finder?key=${widget.sessionKey}&domain=${_domainController.text}'));
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         if (data['status'] == true) {

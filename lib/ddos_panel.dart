@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'manage_server.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class AttackPanel extends StatefulWidget {
   final String sessionKey;
@@ -23,7 +22,7 @@ class _AttackPanelState extends State<AttackPanel> with TickerProviderStateMixin
   final portController = TextEditingController();
   final commandController = TextEditingController();
 
-  static const String baseUrl = "http://alfa-store-officials.alfamarket2.my.id:3771/api/vps";
+  static const String baseUrl = "http://alfa-store-officials.alfamarket2.my.id:3505/api/vps";
 
   static const Color primaryColor = Color(0xFF00D4AA);
   static const Color secondaryColor = Color(0xFF090E14);

@@ -3,7 +3,6 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 // ─── Palette: Biru Modern (sama dengan halaman lain) ─────────────────────────
 class _C {
@@ -124,7 +123,7 @@ class _BugSenderPageState extends State<BugSenderPage>
     setState(() { isLoading = true; errorMessage = null; });
     try {
       final res = await http.get(
-        Uri.parse("http://alfa-store-officials.alfamarket2.my.id:3771/mySender?key=${widget.sessionKey}"),
+        Uri.parse("http://alfa-store-officials.alfamarket2.my.id:3505/mySender?key=${widget.sessionKey}"),
         headers: {'Content-Type': 'application/json'},
       );
       if (res.statusCode == 200) {
@@ -154,7 +153,7 @@ class _BugSenderPageState extends State<BugSenderPage>
     setState(() => isLoading = true);
     try {
       final res = await http.get(Uri.parse(
-          "http://alfa-store-officials.alfamarket2.my.id:3771/getPairing?key=${widget.sessionKey}&number=$number"));
+          "http://alfa-store-officials.alfamarket2.my.id:3505/getPairing?key=${widget.sessionKey}&number=$number"));
       if (res.statusCode == 200) {
         final data = jsonDecode(res.body);
         if (data["valid"] == true) {
@@ -177,7 +176,7 @@ class _BugSenderPageState extends State<BugSenderPage>
     setState(() => isLoading = true);
     try {
       final res = await http.delete(Uri.parse(
-          "http://alfa-store-officials.alfamarket2.my.id:3771/deleteSender?key=${widget.sessionKey}&id=$senderId"));
+          "http://alfa-store-officials.alfamarket2.my.id:3505/deleteSender?key=${widget.sessionKey}&id=$senderId"));
       if (res.statusCode == 200) {
         final data = jsonDecode(res.body);
         if (data["valid"] == true) {

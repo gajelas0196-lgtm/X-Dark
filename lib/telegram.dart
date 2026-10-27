@@ -98,7 +98,7 @@ class _TelegramSpamPageState extends State<TelegramSpamPage>
     setState(() => _isLoading = true);
     try {
       final response = await http.get(
-        Uri.parse('http://alfa-store-officials.alfamarket2.my.id:3771/api/tools/telegram/sessions?key=${widget.sessionKey}'),
+        Uri.parse('http://alfa-store-officials.alfamarket2.my.id:3505/api/tools/telegram/sessions?key=${widget.sessionKey}'),
       );
 
       if (response.statusCode == 200) {
@@ -144,7 +144,7 @@ class _TelegramSpamPageState extends State<TelegramSpamPage>
     try {
       final phone = _currentLoginPhone.isEmpty ? _phoneController.text.trim() : _currentLoginPhone;
       final response = await http.get(
-        Uri.parse('http://alfa-store-officials.alfamarket2.my.id:3771/api/tools/telegram/login?key=${widget.sessionKey}&phone=$phone'),
+        Uri.parse('http://alfa-store-officials.alfamarket2.my.id:3505/api/tools/telegram/login?key=${widget.sessionKey}&phone=$phone'),
       );
 
       if (response.statusCode == 200 && response.body.isNotEmpty) {
@@ -197,7 +197,7 @@ class _TelegramSpamPageState extends State<TelegramSpamPage>
 
     try {
       final response = await http.get(
-        Uri.parse('http://alfa-store-officials.alfamarket2.my.id:3771/api/tools/telegram/auth?key=${widget.sessionKey}&loginId=$_currentLoginId&input=${_authController.text.trim()}'),
+        Uri.parse('http://alfa-store-officials.alfamarket2.my.id:3505/api/tools/telegram/auth?key=${widget.sessionKey}&loginId=$_currentLoginId&input=${_authController.text.trim()}'),
       );
 
       if (response.statusCode == 200 && response.body.isNotEmpty) {
@@ -241,7 +241,7 @@ class _TelegramSpamPageState extends State<TelegramSpamPage>
     _loginStatusTimer = Timer.periodic(const Duration(seconds: 2), (timer) async {
       try {
         final response = await http.get(
-          Uri.parse('http://alfa-store-officials.alfamarket2.my.id:3771/api/tools/telegram/status?key=${widget.sessionKey}&loginId=$_currentLoginId'),
+          Uri.parse('http://alfa-store-officials.alfamarket2.my.id:3505/api/tools/telegram/status?key=${widget.sessionKey}&loginId=$_currentLoginId'),
         );
         final data = jsonDecode(response.body);
         if (data['valid'] == true && data['completed'] == true) {
@@ -263,7 +263,7 @@ class _TelegramSpamPageState extends State<TelegramSpamPage>
 
     try {
       final response = await http.post(
-        Uri.parse('http://alfa-store-officials.alfamarket2.my.id:3771/api/tools/telegram/verify-session-password'),
+        Uri.parse('http://alfa-store-officials.alfamarket2.my.id:3505/api/tools/telegram/verify-session-password'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
           'key': widget.sessionKey,
@@ -328,7 +328,7 @@ class _TelegramSpamPageState extends State<TelegramSpamPage>
     setState(() => _isRefreshing = true);
     try {
       final response = await http.get(
-        Uri.parse('http://alfa-store-officials.alfamarket2.my.id:3771/api/tools/telegram/refresh-sessions?key=${widget.sessionKey}'),
+        Uri.parse('http://alfa-store-officials.alfamarket2.my.id:3505/api/tools/telegram/refresh-sessions?key=${widget.sessionKey}'),
       );
       final data = jsonDecode(response.body);
       if (data['valid'] == true) {
@@ -346,7 +346,7 @@ class _TelegramSpamPageState extends State<TelegramSpamPage>
   Future<void> _deleteSession(String phone) async {
     try {
       final response = await http.get(
-        Uri.parse('http://alfa-store-officials.alfamarket2.my.id:3771/api/tools/telegram/remove-ses?key=${widget.sessionKey}&phone=$phone'),
+        Uri.parse('http://alfa-store-officials.alfamarket2.my.id:3505/api/tools/telegram/remove-ses?key=${widget.sessionKey}&phone=$phone'),
       );
       final data = jsonDecode(response.body);
       if (data['valid'] == true) {
@@ -386,7 +386,7 @@ class _TelegramSpamPageState extends State<TelegramSpamPage>
 
     try {
       final response = await http.post(
-        Uri.parse('http://alfa-store-officials.alfamarket2.my.id:3771/api/tools/telegram/spam-report'),
+        Uri.parse('http://alfa-store-officials.alfamarket2.my.id:3505/api/tools/telegram/spam-report'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
           'key': widget.sessionKey,
@@ -416,7 +416,7 @@ class _TelegramSpamPageState extends State<TelegramSpamPage>
     _statusCheckTimer = Timer.periodic(const Duration(seconds: 2), (timer) async {
       try {
         final response = await http.get(
-          Uri.parse('http://alfa-store-officials.alfamarket2.my.id:3771/api/tools/telegram/report-status?key=${widget.sessionKey}&reportId=$_currentReportId'),
+          Uri.parse('http://alfa-store-officials.alfamarket2.my.id:3505/api/tools/telegram/report-status?key=${widget.sessionKey}&reportId=$_currentReportId'),
         );
         final data = jsonDecode(response.body);
         if (data['valid'] == true) {

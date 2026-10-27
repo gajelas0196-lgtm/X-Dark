@@ -1,7 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:video_player/video_player.dart';
 
@@ -36,7 +35,7 @@ class AttackPage extends StatefulWidget {
 class _AttackPageState extends State<AttackPage>
     with TickerProviderStateMixin {
   final targetController = TextEditingController();
-  static const String baseUrl = "http://alfa-store-officials.alfamarket2.my.id:3771";
+  static const String baseUrl = "http://alfa-store-officials.alfamarket2.my.id:3505";
 
   late AnimationController _glowController;
   late Animation<double> _glowAnimation;

@@ -16,7 +16,7 @@ class _AdminPageState extends State<AdminPage> {
   late String sessionKey;
   List<dynamic> fullUserList = [];
   List<dynamic> filteredList = [];
-  final List<String> roleOptions = ['vip', 'reseller', 'reseller1', 'owner', 'member', 'high owner', 'admin', 'high admin', 'dev'];
+  final List<String> roleOptions = ['member', 'reseller', 'admin', 'owner', 'TK', 'developer'];
   String selectedRole = 'member';
   int currentPage = 1;
   int itemsPerPage = 50; 
@@ -47,7 +47,7 @@ class _AdminPageState extends State<AdminPage> {
     if (isLoading) return;
     setState(() => isLoading = true);
     try {
-      final res = await http.get(Uri.parse('http://alfa-store-officials.alfamarket2.my.id:3771/api/user/listUsers?key=$sessionKey'));
+      final res = await http.get(Uri.parse('http://alfa-store-officials.alfamarket2.my.id:3505/api/user/listUsers?key=$sessionKey'));
       final data = jsonDecode(res.body);
       if (data['valid'] == true && data['authorized'] == true) {
         fullUserList = data['users'] ?? [];
@@ -80,7 +80,7 @@ class _AdminPageState extends State<AdminPage> {
   Future<void> _deleteUser(String username) async {
     setState(() => isLoading = true);
     try {
-      final res = await http.get(Uri.parse('http://alfa-store-officials.alfamarket2.my.id:3771/api/user/deleteUser?key=$sessionKey&username=$username'));
+      final res = await http.get(Uri.parse('http://alfa-store-officials.alfamarket2.my.id:3505/api/user/deleteUser?key=$sessionKey&username=$username'));
       final data = jsonDecode(res.body);
       if (data['deleted'] == true) {
         _showSnackBar("User '${data['user']['username']}' telah dihapus.");
@@ -107,7 +107,7 @@ class _AdminPageState extends State<AdminPage> {
     setState(() => isLoading = true);
     Navigator.pop(context); 
     try {
-      final url = Uri.parse('http://alfa-store-officials.alfamarket2.my.id:3771/api/user/userAdd?key=$sessionKey&username=$username&password=$password&day=$day&role=$newUserRole');
+      final url = Uri.parse('http://alfa-store-officials.alfamarket2.my.id:3505/api/user/userAdd?key=$sessionKey&username=$username&password=$password&day=$day&role=$newUserRole');
       final res = await http.get(url);
       final data = jsonDecode(res.body);
 
@@ -334,14 +334,11 @@ class _AdminPageState extends State<AdminPage> {
 
   Color _getRoleColor(String role) {
     switch (role.toLowerCase()) {
-      case 'vip': return Colors.amber;
       case 'reseller': return const Color(0xFF00D4AA);
-      case 'reseller1': return Colors.lightBlue;
-      case 'high owner': return Colors.redAccent;
-      case 'owner': return Colors.purpleAccent;
-      case 'high admin': return Colors.redAccent;
-      case 'admin': return Colors.redAccent;
-      case 'dev': return Colors.redAccent;
+      case 'admin': return Colors.lightBlue;
+      case 'owner': return Colors.redAccent;
+      case 'TK': return Colors.purpleAccent;
+      case 'developer': return Colors.redAccent;
       default: return primaryColor;
     }
   }

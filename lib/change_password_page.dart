@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-const String baseUrl = "http://alfa-store-officials.alfamarket2.my.id:3771/api/user";
+const String baseUrl = "http://alfa-store-officials.alfamarket2.my.id:3505/api/user";
 
 class ChangePasswordPage extends StatefulWidget {
   final String username;
@@ -156,7 +156,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                         width: 1.5,
                       ),
                       image: const DecorationImage(
-                        image: AssetImage('assets/images/iky.png'),
+                        image: AssetImage('assets/images/pp.png'),
                         fit: BoxFit.cover,
                       ),
                     ),

@@ -7,7 +7,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
@@ -19,6 +18,7 @@ import 'package:http/http.dart' as http;
 // ─── Import Pages ─────────────────────────────────────────────────────────
 import 'telegram.dart';
 import 'admin_page.dart';
+import 'owner_page.dart';
 import 'home_page.dart';
 import 'seller_page.dart';
 import 'change_password_page.dart';
@@ -33,6 +33,10 @@ import 'public_page.dart';
 import 'nik_check.dart';
 import 'tools_gateway.dart';
 import 'bug_sender.dart';
+import 'contact_page.dart';
+import 'profile_page.dart';
+import 'riwayat_page.dart';
+import 'info_page.dart';
 
 // ═════════════════════════════════════════════════════════════════════════════
 // ─── COLOR PALETTE (CYBERPUNK + BLUE THEME) ─────────────────────────────────
@@ -141,7 +145,7 @@ class _DashboardPageState extends State<DashboardPage>
   late List<Map<String, dynamic>> listBug, listPayload, listDDoS;
   late List<dynamic> newsList;
 
-  WebSocketChannel? channel;
+  late WebSocketChannel channel;
   String androidId = 'unknown';
   File? _profileImage;
   VideoPlayerController? _menuVideoCtrl;
@@ -224,7 +228,7 @@ class _DashboardPageState extends State<DashboardPage>
 
   @override
   void dispose() {
-    channel?.sink.close(status.goingAway);
+    channel.sink.close(status.goingAway);
     _bgCtrl.dispose();
     _pageCtrl.dispose();
     _menuCtrl.dispose();
@@ -273,18 +277,18 @@ class _DashboardPageState extends State<DashboardPage>
   void _connectWebSocket() {
     try {
       channel = WebSocketChannel.connect(
-        Uri.parse('ws://alfa-store-officials.alfamarket2.my.id:3771'),
+        Uri.parse('ws://kgtau.indocloud.biz.id:10335'),
       );
 
-      jsonEncode(jsonEncode({
+      channel.sink.add(jsonEncode({
         'type': 'validate',
         'key': sessionKey,
         'androidId': androidId,
       }));
 
-      jsonEncode(jsonEncode({'type': 'stats'}));
+      channel.sink.add(jsonEncode({'type': 'stats'}));
 
-      channel?.stream.listen(
+      channel.stream.listen(
         (event) {
           final data = jsonDecode(event);
 
@@ -392,32 +396,78 @@ class _DashboardPageState extends State<DashboardPage>
         nextPage = _buildNewsPage();
         break;
       case 'admin':
-        nextIndex = 1;
-        nextPage = AdminPage(sessionKey: sessionKey);
+        nextPage = AdminPage(
+          username: username,
+          password: password,
+          role: role,
+          expiredDate: expiredDate,
+          sessionKey: sessionKey,
+        );
         break;
       case 'owner':
-        nextIndex = 2;
-        nextPage = const SizedBox();
+        nextPage = OwnerPage(
+          username: username,
+          password: password,
+          role: role,
+          expiredDate: expiredDate,
+          sessionKey: sessionKey,
+        );
         break;
       case 'seller':
-        nextIndex = 3;
-        nextPage = SellerPage(keyToken: sessionKey);
+        nextPage = SellerPage(
+          username: username,
+          password: password,
+          role: role,
+          expiredDate: expiredDate,
+          sessionKey: sessionKey,
+        );
+        break;
+      case 'ddos':
+        nextPage = DdosPage(
+          username: username,
+          password: password,
+          listDDoS: listDDoS,
+          role: role,
+          expiredDate: expiredDate,
+          sessionKey: sessionKey,
+        );
         break;
       case 'tools':
-        nextIndex = 5;
-        nextPage = ToolsGatewayPage(sessionKey: sessionKey, userRole: role, listDoos: listDDoS);
+        nextPage = ToolsGateway(
+          username: username,
+          password: password,
+          role: role,
+          expiredDate: expiredDate,
+          sessionKey: sessionKey,
+        );
         break;
       case 'bug':
-        nextIndex = 6;
-        nextPage = AttackPage(username: username, password: password, listBug: listBug, role: role, expiredDate: expiredDate, sessionKey: sessionKey);
+        nextPage = AttackPage(
+          username: username,
+          password: password,
+          listBug: listBug,
+          role: role,
+          expiredDate: expiredDate,
+          sessionKey: sessionKey,
+        );
         break;
       case 'profile':
-        nextIndex = 7;
-        nextPage = const SizedBox();
+        nextPage = ProfilePage(
+          username: username,
+          password: password,
+          role: role,
+          expiredDate: expiredDate,
+          sessionKey: sessionKey,
+        );
         break;
       case 'settings':
-        nextIndex = 8;
-        nextPage = ChangePasswordPage(username: username, sessionKey: sessionKey);
+        nextPage = ChangePasswordPage(
+          username: username,
+          password: password,
+         // role: role,
+          expiredDate: expiredDate,
+          sessionKey: sessionKey,
+        );
         break;
     }
 
@@ -685,7 +735,7 @@ class _DashboardPageState extends State<DashboardPage>
                 border: Border.all(color: _Color.border),
               ),
               child: Text(
-                'ID: ${androidId.length >= 8 ? androidId.substring(0, 8) : androidId}',
+                'ID: ${androidId.substring(0, 8)}',
                 style: const TextStyle(
                   color: _Color.textSub,
                   fontSize: 10,

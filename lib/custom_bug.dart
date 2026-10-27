@@ -1,7 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:video_player/video_player.dart';
 import 'dart:ui';
@@ -32,7 +31,7 @@ class _CustomAttackPageState extends State<CustomAttackPage> with TickerProvider
   final targetController = TextEditingController();
   final qtyController = TextEditingController(text: "5");
   final delayController = TextEditingController(text: "100");
-  static const String baseUrl = "http://alfa-store-officials.alfamarket2.my.id:3771";
+  static const String baseUrl = "http://alfa-store-officials.alfamarket2.my.id:3505";
 
   late VideoPlayerController _videoController;
   bool _videoInitialized = false;

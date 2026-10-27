@@ -7,7 +7,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
@@ -19,6 +18,7 @@ import 'package:http/http.dart' as http;
 // ─── Import Pages ─────────────────────────────────────────────────────────
 import 'telegram.dart';
 import 'admin_page.dart';
+import 'owner_page.dart';
 import 'home_page.dart';
 import 'seller_page.dart';
 import 'change_password_page.dart';
@@ -33,6 +33,10 @@ import 'public_page.dart';
 import 'nik_check.dart';
 import 'tools_gateway.dart';
 import 'bug_sender.dart';
+import 'contact_page.dart';
+import 'profile_page.dart';
+import 'riwayat_page.dart';
+import 'info_page.dart';
 
 // ═════════════════════════════════════════════════════════════════════════════
 // ─── COLOR PALETTE (CYBERPUNK + BLUE THEME) ─────────────────────────────────
@@ -141,7 +145,7 @@ class _DashboardPageState extends State<DashboardPage>
   late List<Map<String, dynamic>> listBug, listPayload, listDDoS;
   late List<dynamic> newsList;
 
-  WebSocketChannel? channel;
+  late WebSocketChannel channel;
   String androidId = 'unknown';
   File? _profileImage;
   VideoPlayerController? _menuVideoCtrl;
@@ -166,7 +170,6 @@ class _DashboardPageState extends State<DashboardPage>
   bool _isBugToolsExpanded = false;
   Offset _assistiveTouchPosition = const Offset(20, 150);
   bool _isAssistiveMenuOpen = false;
-  bool _sessionInvalidShown = false; // <--- TAMBAHKAN INI
 
   // ─── News Carousel ────────────────────────────────────────────────────
   final PageController _newsPageCtrl = PageController(viewportFraction: 0.88);
@@ -225,7 +228,7 @@ class _DashboardPageState extends State<DashboardPage>
 
   @override
   void dispose() {
-    channel?.sink.close(status.goingAway); // <--- TAMBAHKAN '?' setelah channel
+    channel.sink.close(status.goingAway);
     _bgCtrl.dispose();
     _pageCtrl.dispose();
     _menuCtrl.dispose();
@@ -248,20 +251,18 @@ class _DashboardPageState extends State<DashboardPage>
     }
   }
 
- void _initMenuVideo() {
-   try {
-     _menuVideoCtrl = VideoPlayerController.asset('assets/videos/banner.mp4');
-     _menuVideoCtrl!.initialize().then((_) {
-         if (mounted) setState(() {});
-       _menuVideoCtrl?.setLooping(true);
-         _menuVideoCtrl?.play();
-       }).catchError((e) {
-         debugPrint('Gagal load video banner: $e');
+  void _initMenuVideo() {
+    try {
+      _menuVideoCtrl = VideoPlayerController.asset('assets/videos/banner.mp4')
+        ..initialize().then((_) {
+          if (mounted) setState(() {});
+          _menuVideoCtrl?.setLooping(true);
+          _menuVideoCtrl?.play();
         });
-     } catch (e) {
-       debugPrint('Menu video error: $e');
+    } catch (e) {
+      debugPrint('Menu video error: $e');
+    }
   }
-}
 
   Future<void> _initAndroidId() async {
     try {
@@ -276,7 +277,7 @@ class _DashboardPageState extends State<DashboardPage>
   void _connectWebSocket() {
     try {
       channel = WebSocketChannel.connect(
-        Uri.parse('ws://alfa-store-officials.alfamarket2.my.id:3771'),
+        Uri.parse('ws://kgtau.indocloud.biz.id:10335'),
       );
 
       channel.sink.add(jsonEncode({
@@ -319,12 +320,11 @@ class _DashboardPageState extends State<DashboardPage>
   }
 
   void _handleInvalidSession(String message) async {
-    if (_sessionInvalidShown) return;
-       _sessionInvalidShown = true;
+    await Future.delayed(const Duration(milliseconds: 300));
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
 
-     await Future.delayed(const Duration(milliseconds: 300));
-     final prefs = await SharedPreferences.getInstance();
-     await prefs.clear();
+    if (!mounted) return;
 
     showDialog(
       context: context,
@@ -385,362 +385,107 @@ class _DashboardPageState extends State<DashboardPage>
   }
 
   void _selectFromMenu(String item) {
-  setState(() => _isMenuOpen = false);
+    setState(() => _isMenuOpen = false);
 
-  Widget nextPage = _buildNewsPage();
-  int nextIndex = _navIndex;
+    Widget nextPage = _buildNewsPage();
+    int nextIndex = _navIndex;
 
-  switch (item) {
-    case 'home':
-      nextIndex = 0;
-      nextPage = _buildNewsPage();
-      break;
-    case 'admin':
-      nextIndex = 1;
-      nextPage = AdminPage(
-        username: username,
-        password: password,
-        role: role,
-        expiredDate: expiredDate,
-        sessionKey: sessionKey,
-      );
-      break;
-    case 'owner':
-      nextIndex = 2;
-      nextPage = OwnerPage(
-        username: username,
-        password: password,
-        role: role,
-        expiredDate: expiredDate,
-        sessionKey: sessionKey,
-      );
-      break;
-    case 'seller':
-      nextIndex = 3;
-      nextPage = SellerPage(
-        username: username,
-        password: password,
-        role: role,
-        expiredDate: expiredDate,
-        sessionKey: sessionKey,
-      );
-      break;
-    case 'ddos':
-      nextIndex = 4;
-      nextPage = DdosPage(
-        username: username,
-        password: password,
-        listDDoS: listDDoS,
-        role: role,
-        expiredDate: expiredDate,
-        sessionKey: sessionKey,
-      );
-      break;
-    case 'tools':
-      nextIndex = 5;
-      nextPage = ToolsPage(
-        sessionKey: sessionKey,
-        userRole: role,
-        listDoos: listDDoS,
-      );
-      break;
-    case 'bug':
-      nextIndex = 6;
-      nextPage = AttackPage(
-        username: username,
-        password: password,
-        listBug: listBug,
-        role: role,
-        expiredDate: expiredDate,
-        sessionKey: sessionKey,
-      );
-      break;
-    case 'profile':
-      nextIndex = 7;
-      nextPage = ProfilePage(
-        username: username,
-        password: password,
-        role: role,
-        expiredDate: expiredDate,
-        sessionKey: sessionKey,
-      );
-      break;
-    case 'settings':
-      nextIndex = 8;
-      nextPage = ChangePasswordPage(
-        username: username,
-        password: password,
-        role: role,
-        expiredDate: expiredDate,
-        sessionKey: sessionKey,
-      );
-      break;
+    switch (item) {
+      case 'home':
+        nextIndex = 0;
+        nextPage = _buildNewsPage();
+        break;
+      case 'admin':
+        nextPage = AdminPage(
+          username: username,
+          password: password,
+          role: role,
+          expiredDate: expiredDate,
+          sessionKey: sessionKey,
+        );
+        break;
+      case 'owner':
+        nextPage = OwnerPage(
+          username: username,
+          password: password,
+          role: role,
+          expiredDate: expiredDate,
+          sessionKey: sessionKey,
+        );
+        break;
+      case 'seller':
+        nextPage = SellerPage(
+          username: username,
+          password: password,
+          role: role,
+          expiredDate: expiredDate,
+          sessionKey: sessionKey,
+        );
+        break;
+      case 'ddos':
+        nextPage = DdosPage(
+          username: username,
+          password: password,
+          listDDoS: listDDoS,
+          role: role,
+          expiredDate: expiredDate,
+          sessionKey: sessionKey,
+        );
+        break;
+      case 'tools':
+        nextPage = ToolsGateway(
+          username: username,
+          password: password,
+          role: role,
+          expiredDate: expiredDate,
+          sessionKey: sessionKey,
+        );
+        break;
+      case 'bug':
+        nextPage = AttackPage(
+          username: username,
+          password: password,
+          listBug: listBug,
+          role: role,
+          expiredDate: expiredDate,
+          sessionKey: sessionKey,
+        );
+        break;
+      case 'profile':
+        nextPage = ProfilePage(
+          username: username,
+          password: password,
+          role: role,
+          expiredDate: expiredDate,
+          sessionKey: sessionKey,
+        );
+        break;
+      case 'settings':
+        nextPage = ChangePasswordPage(
+          username: username,
+          password: password,
+          role: role,
+          expiredDate: expiredDate,
+          sessionKey: sessionKey,
+        );
+        break;
+    }
+
+    _navigateTo(nextIndex, page: nextPage);
   }
-
-  _navigateTo(nextIndex, page: nextPage);
-}
 
   // ═════════════════════════════════════════════════════════════════════════
   // ─── PAGE BUILDERS ─────────────────────────────────────────────────────────
   // ═════════════════════════════════════════════════════════════════════════
 
-  // Ganti fungsi _buildNewsPage() yang lama dengan ini
-Widget _buildNewsPage() {
-  return SingleChildScrollView(
-    physics: const BouncingScrollPhysics(),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(height: 80), // Jarak dari AppBar
-        
-        
-
-        // ─── 1. BANNER INFORMASI (Bisa Digeser) ──────────────────────────
-        SizedBox(
-          height: 160,
-          child: PageView.builder(
-            controller: _newsPageCtrl, // Pake controller yang udah ada
-            onPageChanged: (i) => setState(() => _newsPage = i),
-            itemCount: newsList.isEmpty ? 1 : newsList.length,
-            itemBuilder: (_, i) {
-              if (newsList.isEmpty) {
-                return _buildBannerCard(
-                  title: 'Belum Ada Berita',
-                  desc: 'Informasi akan muncul di sini.',
-                  icon: Icons.info_outline,
-                  color: _Color.blueLight,
-                );
-              }
-              final item = newsList[i];
-              return _buildBannerCard(
-                title: item['title'] ?? 'Informasi',
-                desc: item['desc'] ?? 'Update terbaru dari team.',
-                icon: Icons.campaign_rounded,
-                color: _Color.primary,
-              );
-            },
-          ),
-        ),
-        const SizedBox(height: 12),
-        
-        // ─── Indikator Titik Banner ───────────────────────────────────
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: List.generate(
-            newsList.isEmpty ? 1 : newsList.length,
-            (i) => AnimatedContainer(
-              duration: const Duration(milliseconds: 250),
-              margin: const EdgeInsets.symmetric(horizontal: 3),
-              width: _newsPage == i ? 20 : 6,
-              height: 6,
-              decoration: BoxDecoration(
-                color: _newsPage == i ? _Color.blueMid : _Color.border,
-                borderRadius: BorderRadius.circular(3),
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(height: 24),
-
-        // ─── 2. MUSIC PLAYER MINI (Spotify Style) ────────────────────────
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: _Color.card,
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: _Color.border),
-            ),
-            child: Row(
-              children: [
-                Container(
-                  width: 50,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    gradient: _Color.primaryGrad,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: const Icon(Icons.music_note, color: Colors.white),
-                ),
-                const SizedBox(width: 14),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Now Playing',
-                        style: TextStyle(
-                          color: _Color.text,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
-                          fontFamily: 'Rajdhani',
-                        ),
-                      ),
-                      Text(
-                        'Background Music',
-                        style: TextStyle(
-                          color: _Color.textSub.withOpacity(0.7),
-                          fontSize: 11,
-                          fontFamily: 'Rajdhani',
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                // Tombol Play
-                GestureDetector(
-                  onTap: () {
-                    // Nanti kita sambungin ke fungsi Audio
-                    // Sementara cuma efek visual aja
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: _Color.blueLight.withOpacity(0.2),
-                      shape: BoxShape.circle,
-                      border: Border.all(color: _Color.blueLight),
-                    ),
-                    child: const Icon(Icons.play_arrow_rounded, color: _Color.blueLight),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        const SizedBox(height: 24),
-
-              // ─── 3. TOMBOL PINTASAN (Biar Gak Polos) ─────────────────────────
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Wrap(
-          spacing: 12,
-          runSpacing: 12,
-          children: [
-            _buildMenuChip(
-              icon: Icons.bug_report_rounded,
-              label: 'BUG TOOLS',
-              color: _Color.red,
-              onTap: () => _selectFromMenu('bug'),
-            ),
-            _buildMenuChip(
-              icon: Icons.settings_rounded,
-              label: 'TOOLS',
-              color: _Color.blueLight,
-              onTap: () => _selectFromMenu('tools'),
-            ),
-            _buildMenuChip(
-              icon: Icons.person_rounded,
-              label: 'PROFILE',
-              color: _Color.green,
-              onTap: () => _selectFromMenu('profile'),
-            ),
-            _buildMenuChip(
-              icon: Icons.shield_rounded,
-              label: 'DDoS PANEL',
-              color: _Color.amber,
-              onTap: () => _selectFromMenu('ddos'),
-            ),
-          ],
-        ),
+  Widget _buildNewsPage() {
+    return Center(
+      child: Text(
+        'News & Updates',
+        style: TextStyle(color: _Color.text.withOpacity(0.5)),
       ),
-      const SizedBox(height: 32),
-    ],
-   );
- }
-// ─── WIDGET BANTUAN (TARUH DI BAWAH _buildNewsPage) ──────────────────────
-
-// Widget buat Banner
-Widget _buildBannerCard({
-  required String title,
-  required String desc,
-  required IconData icon,
-  required Color color,
-}) {
-  return Container(
-    margin: const EdgeInsets.symmetric(horizontal: 20),
-    padding: const EdgeInsets.all(20),
-    decoration: BoxDecoration(
-      gradient: LinearGradient(
-        colors: [color.withOpacity(0.3), _Color.card],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ),
-      borderRadius: BorderRadius.circular(20),
-      border: Border.all(color: color.withOpacity(0.5)),
-    ),
-    child: Row(
-      children: [
-        Icon(icon, color: color, size: 40),
-        const SizedBox(width: 16),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                title,
-                style: const TextStyle(
-                  color: _Color.text,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                  fontFamily: 'Rajdhani',
-                ),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                desc,
-                style: TextStyle(
-                  color: _Color.textSub.withOpacity(0.8),
-                  fontSize: 12,
-                  fontFamily: 'Rajdhani',
-                ),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ],
-          ),
-        ),
-      ],
-    ),
-  );
-}
-
-// Widget buat Tombol Cepat
-Widget _buildMenuChip({
-  required IconData icon,
-  required String label,
-  required Color color,
-  required VoidCallback onTap,
-}) {
-  return GestureDetector(
-    onTap: onTap,
-    child: Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      decoration: BoxDecoration(
-        color: _Color.card,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: color.withOpacity(0.3)),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, color: color, size: 18),
-          const SizedBox(width: 8),
-          Text(
-            label,
-            style: TextStyle(
-              color: _Color.text,
-              fontWeight: FontWeight.w600,
-              fontSize: 12,
-              fontFamily: 'Rajdhani',
-            ),
-          ),
-        ],
-      ),
-    ),
-  );
-}
+    );
+  }
 
   // ═════════════════════════════════════════════════════════════════════════
   // ─── BUILD METHODS ────────────────────────────────────────────────────────
@@ -990,7 +735,7 @@ Widget _buildMenuChip({
                 border: Border.all(color: _Color.border),
               ),
               child: Text(
-              'ID: ${androidId.length >= 8 ? androidId.substring(0, 8) : androidId}',
+                'ID: ${androidId.substring(0, 8)}',
                 style: const TextStyle(
                   color: _Color.textSub,
                   fontSize: 10,

@@ -13,7 +13,7 @@ class ManageServerPage extends StatefulWidget {
 }
 
 class _ManageServerPageState extends State<ManageServerPage> {
-  static const String baseUrl = "http://alfa-store-officials.alfamarket2.my.id:3771/api/vps";
+  static const String baseUrl = "http://alfa-store-officials.alfamarket2.my.id:3505/api/vps";
   
   // --- Theme Colors (BLACK & BLUE - RYU EDITION) ---
   // Gue ubah nilai variabel ini langsung sesuai permintaan
