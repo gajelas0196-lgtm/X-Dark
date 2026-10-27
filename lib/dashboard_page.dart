@@ -7,6 +7,10 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+<<<<<<< HEAD
+=======
+//import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+>>>>>>> ff65e8be01063a7f0ed2d42510177cd0bd872a40
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
@@ -43,35 +47,29 @@ import 'info_page.dart';
 // ═════════════════════════════════════════════════════════════════════════════
 
 class _Color {
-  // Background & Surface
-  static const bg        = Color(0xFF060B14);      // Ultra dark bg
-  static const surface   = Color(0xFF0C1424);      // Panel surface
-  static const card      = Color(0xFF101A2E);      // Card bg
-  static const border    = Color(0xFF1A2D4A);      // Border color
-  static const borderLit = Color(0xFF1E3A5F);      // Border highlight
+  static const bg        = Color(0xFF060B14);
+  static const surface   = Color(0xFF0C1424);
+  static const card      = Color(0xFF101A2E);
+  static const border    = Color(0xFF1A2D4A);
+  static const borderLit = Color(0xFF1E3A5F);
 
-  // Primary Colors (Blue theme)
-  static const blue      = Color(0xFF1B6FBD);      // Primary blue
-  static const blueMid   = Color(0xFF2D8FE8);      // Mid blue
-  static const blueLight = Color(0xFF56AEF5);      // Light blue
-  static const blueFrost = Color(0xFF90CEF7);      // Frost blue
+  static const blue      = Color(0xFF1B6FBD);
+  static const blueMid   = Color(0xFF2D8FE8);
+  static const blueLight = Color(0xFF56AEF5);
+  static const blueFrost = Color(0xFF90CEF7);
 
-  // Accent Colors (Cyberpunk theme)
-  static const primary   = Color(0xFFB04AFF);      // Violet neon
-  static const accent    = Color(0xFFFF2D78);      // Pink accent
-  static const accentBlue= Color(0xFF00C8FF);      // Cyan
+  static const primary   = Color(0xFFB04AFF);
+  static const accent    = Color(0xFFFF2D78);
+  static const accentBlue= Color(0xFF00C8FF);
 
-  // Status Colors
-  static const green     = Color(0xFF22C55E);      // Success
-  static const amber     = Color(0xFFF59E0B);      // Warning
-  static const red       = Color(0xFFEF4444);      // Error
+  static const green     = Color(0xFF22C55E);
+  static const amber     = Color(0xFFF59E0B);
+  static const red       = Color(0xFFEF4444);
 
-  // Text Colors
-  static const text      = Color(0xFFE2EDF9);      // Primary text
-  static const textSub   = Color(0xFF7A9BBF);      // Secondary text
-  static const textDim   = Color(0xFF3A5470);      // Dimmed text
+  static const text      = Color(0xFFE2EDF9);
+  static const textSub   = Color(0xFF7A9BBF);
+  static const textDim   = Color(0xFF3A5470);
 
-  // Gradients
   static const LinearGradient btnGrad = LinearGradient(
     colors: [blueMid, blueLight],
     begin: Alignment.topLeft,
@@ -277,16 +275,27 @@ class _DashboardPageState extends State<DashboardPage>
   void _connectWebSocket() {
     try {
       channel = WebSocketChannel.connect(
+<<<<<<< HEAD
         Uri.parse('ws://kgtau.indocloud.biz.id:10335'),
       );
 
       channel.sink.add(jsonEncode({
+=======
+        Uri.parse('ws://alfa-store-officials.alfamarket2.my.id:3505'),
+      );
+
+      channel?.sink.add(jsonEncode({
+>>>>>>> ff65e8be01063a7f0ed2d42510177cd0bd872a40
         'type': 'validate',
         'key': sessionKey,
         'androidId': androidId,
       }));
 
+<<<<<<< HEAD
       channel.sink.add(jsonEncode({'type': 'stats'}));
+=======
+      channel?.sink.add(jsonEncode({'type': 'stats'}));
+>>>>>>> ff65e8be01063a7f0ed2d42510177cd0bd872a40
 
       channel.stream.listen(
         (event) {
@@ -397,6 +406,7 @@ class _DashboardPageState extends State<DashboardPage>
         break;
       case 'admin':
         nextPage = AdminPage(
+<<<<<<< HEAD
           username: username,
           password: password,
           role: role,
@@ -410,11 +420,14 @@ class _DashboardPageState extends State<DashboardPage>
           password: password,
           role: role,
           expiredDate: expiredDate,
+=======
+>>>>>>> ff65e8be01063a7f0ed2d42510177cd0bd872a40
           sessionKey: sessionKey,
         );
         break;
       case 'seller':
         nextPage = SellerPage(
+<<<<<<< HEAD
           username: username,
           password: password,
           role: role,
@@ -430,6 +443,9 @@ class _DashboardPageState extends State<DashboardPage>
           role: role,
           expiredDate: expiredDate,
           sessionKey: sessionKey,
+=======
+          keyToken: sessionKey,
+>>>>>>> ff65e8be01063a7f0ed2d42510177cd0bd872a40
         );
         break;
       case 'tools':
@@ -450,6 +466,7 @@ class _DashboardPageState extends State<DashboardPage>
           expiredDate: expiredDate,
           sessionKey: sessionKey,
         );
+<<<<<<< HEAD
         break;
       case 'profile':
         nextPage = ProfilePage(
@@ -459,13 +476,20 @@ class _DashboardPageState extends State<DashboardPage>
           expiredDate: expiredDate,
           sessionKey: sessionKey,
         );
+=======
+>>>>>>> ff65e8be01063a7f0ed2d42510177cd0bd872a40
         break;
       case 'settings':
         nextPage = ChangePasswordPage(
           username: username,
+<<<<<<< HEAD
           password: password,
          // role: role,
           expiredDate: expiredDate,
+=======
+       //   role: role,
+       //   expiredDate: expiredDate,
+>>>>>>> ff65e8be01063a7f0ed2d42510177cd0bd872a40
           sessionKey: sessionKey,
         );
         break;
@@ -487,7 +511,7 @@ class _DashboardPageState extends State<DashboardPage>
     );
   }
 
-  // ═════════════════════════════════════════════════════════════════════════
+    // ═════════════════════════════════════════════════════════════════════════
   // ─── BUILD METHODS ────────────────────────────────────────────────────────
   // ═════════════════════════════════════════════════════════════════════════
 
@@ -831,12 +855,6 @@ class _DashboardPageState extends State<DashboardPage>
               'Admin Panel',
               'admin',
             ),
-          if (role.toLowerCase() == 'owner')
-            _buildDrawerItem(
-              Icons.workspace_premium_rounded,
-              'Owner Panel',
-              'owner',
-            ),
           if (role.toLowerCase() == 'reseller')
             _buildDrawerItem(
               Icons.storefront_rounded,
@@ -849,19 +867,9 @@ class _DashboardPageState extends State<DashboardPage>
             'bug',
           ),
           _buildDrawerItem(
-            Icons.cloud_off_rounded,
-            'DDoS Panel',
-            'ddos',
-          ),
-          _buildDrawerItem(
             Icons.construction_rounded,
             'Tools Gateway',
             'tools',
-          ),
-          _buildDrawerItem(
-            Icons.person_rounded,
-            'Profile',
-            'profile',
           ),
           _buildDrawerItem(
             Icons.lock_rounded,
@@ -931,11 +939,6 @@ class _DashboardPageState extends State<DashboardPage>
             Icons.home_rounded,
             'Home',
             () => _selectFromMenu('home'),
-          ),
-          _buildFloatingMenuItem(
-            Icons.person_rounded,
-            'Profile',
-            () => _selectFromMenu('profile'),
           ),
           _buildFloatingMenuItem(
             Icons.lock_rounded,
@@ -1088,12 +1091,18 @@ class _NewsMediaState extends State<NewsMedia> {
   void initState() {
     super.initState();
     if (_isVideo(widget.url)) {
-      _controller = VideoPlayerController.networkUrl(Uri.parse(widget.url))
-        ..initialize().then((_) {
-          setState(() {});
-          _controller?.setLooping(true);
-          _controller?.play();
-        });
+      try {
+        _controller = VideoPlayerController.networkUrl(Uri.parse(widget.url))
+          ..initialize().then((_) {
+            if (mounted) setState(() {}); // Tambahkan if (mounted)
+            _controller?.setLooping(true);
+            _controller?.play();
+          }).catchError((error) {
+            debugPrint('Gagal memuat video: $error');
+          });
+      } catch (e) {
+        debugPrint('Error inisialisasi video: $e');
+      }
     }
   }
 

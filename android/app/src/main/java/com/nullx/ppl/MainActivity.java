@@ -1,4 +1,4 @@
-package com.abcdzii.ppl;
+package com.nullx.ppl;
 
 import io.flutter.embedding.android.FlutterActivity;
 
