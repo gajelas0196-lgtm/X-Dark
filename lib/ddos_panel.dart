@@ -409,12 +409,12 @@ class _AttackPanelState extends State<AttackPanel> with TickerProviderStateMixin
             ],
           ),
           const SizedBox(height: 18),
-          _buildTextField(targetController, "Target Address / IP", FontAwesomeIcons.server),
+          _buildTextField(targetController, "Target Address / IP", Icons.server),
           const SizedBox(height: 14),
           _buildTextField(
             portController,
             isIcmp ? "ICMP (No Port)" : "Port Number",
-            FontAwesomeIcons.hashtag,
+            Icons.hashtag,
             enabled: !isIcmp,
             isNum: true,
           ),
@@ -579,9 +579,9 @@ class _AttackPanelState extends State<AttackPanel> with TickerProviderStateMixin
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         if (_isSpeedDialOpen) ...[
-          _buildFloatingAction(FontAwesomeIcons.server, "Servers", () => Navigator.push(context, MaterialPageRoute(builder: (c) => ManageServerPage(sessionKey: widget.sessionKey)))),
+          _buildFloatingAction(Icons.server, "Servers", () => Navigator.push(context, MaterialPageRoute(builder: (c) => ManageServerPage(sessionKey: widget.sessionKey)))),
           const SizedBox(height: 14),
-          _buildFloatingAction(FontAwesomeIcons.terminal, "Command", _showCommandDialog),
+          _buildFloatingAction(Icons.terminal, "Command", _showCommandDialog),
           const SizedBox(height: 14),
         ],
         GestureDetector(

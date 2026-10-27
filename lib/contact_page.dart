@@ -44,7 +44,7 @@ const _contacts = [
   _Contact(
     label:    'Telegram',
     handle:   '@RamzMd',
-    icon:     FontAwesomeIcons.telegram,
+    icon:     Icons.telegram,
     color:    Color(0xFF39A7E0),
     colorDim: Color(0xFF1A4D6E),
     url:      'https://t.me/RamzMd',
@@ -52,7 +52,7 @@ const _contacts = [
   _Contact(
     label:    'WhatsApp',
     handle:   '+62 857-9453-0375',
-    icon:     FontAwesomeIcons.whatsapp,
+    icon:     Icons.whatsapp,
     color:    Color(0xFF25D366),
     colorDim: Color(0xFF0D4A27),
     url:      'https://wa.me/6285794530375',
@@ -60,7 +60,7 @@ const _contacts = [
   _Contact(
     label:    'TikTok',
     handle:   '@ramzofcial.id',
-    icon:     FontAwesomeIcons.tiktok,
+    icon:     Icons.tiktok,
     color:    Color(0xFFEE1D52),
     colorDim: Color(0xFF4A0D1F),
     url:      'https://www.tiktok.com/@ramzofcial.id?_r=1&_t=ZS-95Xu8Hv3naq',

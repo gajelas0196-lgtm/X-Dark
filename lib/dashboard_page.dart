@@ -7,10 +7,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-<<<<<<< HEAD
-=======
-//import 'package:font_awesome_flutter/font_awesome_flutter.dart';
->>>>>>> ff65e8be01063a7f0ed2d42510177cd0bd872a40
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
@@ -275,27 +271,21 @@ class _DashboardPageState extends State<DashboardPage>
   void _connectWebSocket() {
     try {
       channel = WebSocketChannel.connect(
-<<<<<<< HEAD
         Uri.parse('ws://kgtau.indocloud.biz.id:10335'),
       );
 
       channel.sink.add(jsonEncode({
-=======
         Uri.parse('ws://alfa-store-officials.alfamarket2.my.id:3505'),
       );
 
       channel?.sink.add(jsonEncode({
->>>>>>> ff65e8be01063a7f0ed2d42510177cd0bd872a40
         'type': 'validate',
         'key': sessionKey,
         'androidId': androidId,
       }));
 
-<<<<<<< HEAD
       channel.sink.add(jsonEncode({'type': 'stats'}));
-=======
       channel?.sink.add(jsonEncode({'type': 'stats'}));
->>>>>>> ff65e8be01063a7f0ed2d42510177cd0bd872a40
 
       channel.stream.listen(
         (event) {
@@ -406,7 +396,6 @@ class _DashboardPageState extends State<DashboardPage>
         break;
       case 'admin':
         nextPage = AdminPage(
-<<<<<<< HEAD
           username: username,
           password: password,
           role: role,
@@ -420,14 +409,11 @@ class _DashboardPageState extends State<DashboardPage>
           password: password,
           role: role,
           expiredDate: expiredDate,
-=======
->>>>>>> ff65e8be01063a7f0ed2d42510177cd0bd872a40
           sessionKey: sessionKey,
         );
         break;
       case 'seller':
         nextPage = SellerPage(
-<<<<<<< HEAD
           username: username,
           password: password,
           role: role,
@@ -443,9 +429,7 @@ class _DashboardPageState extends State<DashboardPage>
           role: role,
           expiredDate: expiredDate,
           sessionKey: sessionKey,
-=======
           keyToken: sessionKey,
->>>>>>> ff65e8be01063a7f0ed2d42510177cd0bd872a40
         );
         break;
       case 'tools':
@@ -466,7 +450,6 @@ class _DashboardPageState extends State<DashboardPage>
           expiredDate: expiredDate,
           sessionKey: sessionKey,
         );
-<<<<<<< HEAD
         break;
       case 'profile':
         nextPage = ProfilePage(
@@ -476,20 +459,15 @@ class _DashboardPageState extends State<DashboardPage>
           expiredDate: expiredDate,
           sessionKey: sessionKey,
         );
-=======
->>>>>>> ff65e8be01063a7f0ed2d42510177cd0bd872a40
         break;
       case 'settings':
         nextPage = ChangePasswordPage(
           username: username,
-<<<<<<< HEAD
           password: password,
          // role: role,
           expiredDate: expiredDate,
-=======
        //   role: role,
        //   expiredDate: expiredDate,
->>>>>>> ff65e8be01063a7f0ed2d42510177cd0bd872a40
           sessionKey: sessionKey,
         );
         break;

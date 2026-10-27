@@ -457,12 +457,12 @@ class _OwnerPageState extends State<OwnerPage> {
 
                 _buildGlassCard(
                   title: "DELETE USER",
-                  icon: FontAwesomeIcons.userSlash,
+                  icon: Icons.userSlash,
                   children: [
                     _buildInput(
                       label: "Username Target",
                       controller: deleteController,
-                      icon: FontAwesomeIcons.user,
+                      icon: Icons.user,
                     ),
                     SizedBox(height: 10),
                     Container(
@@ -508,22 +508,22 @@ class _OwnerPageState extends State<OwnerPage> {
 
                 _buildGlassCard(
                   title: "CREATE ACCOUNT",
-                  icon: FontAwesomeIcons.userPlus,
+                  icon: Icons.userPlus,
                   children: [
                     _buildInput(
                       label: "Username",
                       controller: createUsernameController,
-                      icon: FontAwesomeIcons.user,
+                      icon: Icons.user,
                     ),
                     _buildInput(
                       label: "Password",
                       controller: createPasswordController,
-                      icon: FontAwesomeIcons.lock,
+                      icon: Icons.lock,
                     ),
                     _buildInput(
                       label: "Durasi (Hari)",
                       controller: createDayController,
-                      icon: FontAwesomeIcons.calendarDay,
+                      icon: Icons.calendarDay,
                       type: TextInputType.number,
                     ),
                     Container(
@@ -596,17 +596,17 @@ class _OwnerPageState extends State<OwnerPage> {
 
                 _buildGlassCard(
                   title: "EXTEND DURATION",
-                  icon: FontAwesomeIcons.clock,
+                  icon: Icons.clock,
                   children: [
                     _buildInput(
                       label: "Username Target",
                       controller: editUsernameController,
-                      icon: FontAwesomeIcons.userEdit,
+                      icon: Icons.userEdit,
                     ),
                     _buildInput(
                       label: "Tambah Hari",
                       controller: editDayController,
-                      icon: FontAwesomeIcons.calendarPlus,
+                      icon: Icons.calendarPlus,
                       type: TextInputType.number,
                     ),
                     SizedBox(height: 10),
@@ -656,7 +656,7 @@ class _OwnerPageState extends State<OwnerPage> {
 
                 _buildGlassCard(
                   title: "USER LIST",
-                  icon: FontAwesomeIcons.users,
+                  icon: Icons.users,
                   children: [
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),

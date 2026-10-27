@@ -202,7 +202,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   fit: BoxFit.cover,
                                 )
                               : Icon(
-                                  FontAwesomeIcons.userAstronaut,
+                                  Icons.userAstronaut,
                                   size: 50,
                                   color: _C.text.withOpacity(0.8),
                                 ),

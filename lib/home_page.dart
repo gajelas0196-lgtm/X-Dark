@@ -228,7 +228,7 @@ class _AttackPageState extends State<AttackPage>
               _buildInput(
                 controller: targetController,
                 hint: "62xxx (contoh: 6281234567890)",
-                icon: FontAwesomeIcons.crosshairs,
+                icon: Icons.crosshairs,
               ),
               const SizedBox(height: 16),
 

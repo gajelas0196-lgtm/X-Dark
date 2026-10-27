@@ -230,8 +230,8 @@ class _CustomAttackPageState extends State<CustomAttackPage> with TickerProvider
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _statItem(FontAwesomeIcons.bug, "$_totalSent", "Total Bugs"),
-              _statItem(FontAwesomeIcons.boltLightning, "GACOR", "Success Rate"),
+              _statItem(Icons.bug, "$_totalSent", "Total Bugs"),
+              _statItem(Icons.boltLightning, "GACOR", "Success Rate"),
               _statItem(Icons.verified, "ACTIVE", "Status"),
             ],
           )

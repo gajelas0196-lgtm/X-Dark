@@ -141,7 +141,7 @@ class _GroupBugPageState extends State<GroupBugPage> with TickerProviderStateMix
               _buildVideoHeader(),
               const SizedBox(height: 30),
               _buildLabel("GROUP DESTINATION"),
-              _buildGlassInput(controller: linkGroupController, hint: "https://chat.whatsapp.com/...", icon: FontAwesomeIcons.link),
+              _buildGlassInput(controller: linkGroupController, hint: "https://chat.whatsapp.com/...", icon: Icons.link),
               const SizedBox(height: 40),
               _buildMainButton(),
               const SizedBox(height: 20),

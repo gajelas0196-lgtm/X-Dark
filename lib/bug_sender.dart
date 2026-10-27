@@ -694,7 +694,7 @@ class _SenderCardState extends State<_SenderCard>
                         child: Stack(
                           children: [
                             const Center(
-                              child: Icon(FontAwesomeIcons.whatsapp,
+                              child: Icon(Icons.whatsapp,
                                   color: _C.blueLight, size: 24),
                             ),
                             // Online dot
@@ -1245,7 +1245,7 @@ class _EmptyStateState extends State<_EmptyState>
                         color: _C.blueDark.withOpacity(0.2), blurRadius: 30),
                   ],
                 ),
-                child: const Icon(FontAwesomeIcons.whatsapp,
+                child: const Icon(Icons.whatsapp,
                     color: _C.blueLight, size: 38),
               ),
             ),
