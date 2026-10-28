@@ -59,19 +59,16 @@ class MyApp extends StatelessWidget {
             return MaterialPageRoute(builder: (_) => const BuyAccountPage());
 
           case '/loader':
-            return MaterialPageRoute(
-              builder: (_) => DashboardPage(
-                username: args?['username'] ?? '',
-                password: args?['password'] ?? '',
-                role: args?['role'] ?? 'member',
-                sessionKey: args?['key'] ?? '',
-                expiredDate: args?['expiredDate'] ?? '',
-                listBug: List<Map<String, dynamic>>.from(args?['listBug'] ?? []),
-                listPayload: List<Map<String, dynamic>>.from(args?['listPayload'] ?? []),
-                listDDoS: List<Map<String, dynamic>>.from(args?['listDDoS'] ?? []),
-                news: List<Map<String, dynamic>>.from(args?['news'] ?? []),
-              ),
-            );
+           return MaterialPageRoute(
+             builder: (_) => HomePage( // <-- Ubah jadi HomePage
+               username: args?['username'] ?? '',
+               password: args?['password'] ?? '',
+               role: args?['role'] ?? 'member',
+               sessionKey: args?['key'] ?? '',
+               expiredDate: args?['expiredDate'] ?? '',
+              listBug: List<Map<String, dynamic>>.from(args?['listBug'] ?? []),
+            ),
+          );
 
           case '/attack':
             return MaterialPageRoute(
