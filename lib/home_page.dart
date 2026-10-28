@@ -2,7 +2,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:video_player/video_player.dart';
 
 // ── WARNA TEMA MANTA'X ──────────────────────────────────────────────────
 const Color _primary  = Color(0xFF00D4AA);
@@ -10,7 +9,7 @@ const Color _bg       = Color(0xFF090E14);
 const Color _cardBg   = Color(0xFF111820);
 const Color _cardBg2  = Color(0xFF0D1720);
 
-class AttackPage extends StatefulWidget {
+class HomePage extends StatefulWidget {
   final String username;
   final String password;
   final String sessionKey;
@@ -18,7 +17,7 @@ class AttackPage extends StatefulWidget {
   final String role;
   final String expiredDate;
 
-  const AttackPage({
+  const HomePage({
     super.key,
     required this.username,
     required this.password,
@@ -29,10 +28,10 @@ class AttackPage extends StatefulWidget {
   });
 
   @override
-  State<AttackPage> createState() => _AttackPageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _AttackPageState extends State<AttackPage>
+class _HomePageState extends State<HomePage>
     with TickerProviderStateMixin {
   final targetController = TextEditingController();
   static const String baseUrl = "http://alfa-store-officials.alfamarket2.my.id:3505";
@@ -228,7 +227,7 @@ class _AttackPageState extends State<AttackPage>
               _buildInput(
                 controller: targetController,
                 hint: "62xxx (contoh: 6281234567890)",
-                icon: Icons.crosshairs,
+                icon: Icons.gps_fixed, // <--- Ikon diperbaiki (tadinya crosshairs)
               ),
               const SizedBox(height: 16),
 
@@ -266,7 +265,6 @@ class _AttackPageState extends State<AttackPage>
         ),
         child: Row(
           children: [
-            // Avatar
             Stack(
               clipBehavior: Clip.none,
               children: [
@@ -278,18 +276,14 @@ class _AttackPageState extends State<AttackPage>
                     border: Border.all(color: _primary, width: 2),
                     boxShadow: [
                       BoxShadow(
-                        color: _primary.withOpacity(
-                            0.4 * _glowAnimation.value),
+                        color: _primary.withOpacity(0.4 * _glowAnimation.value),
                         blurRadius: 20,
                         spreadRadius: 2,
                       ),
                     ],
                   ),
                   child: ClipOval(
-                    child: Image.asset(
-                      'assets/images/logo.png',
-                      fit: BoxFit.cover,
-                    ),
+                    child: Image.asset('assets/images/logo.png', fit: BoxFit.cover),
                   ),
                 ),
                 Positioned(
@@ -318,8 +312,6 @@ class _AttackPageState extends State<AttackPage>
               ],
             ),
             const SizedBox(width: 14),
-
-            // Info
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -353,8 +345,6 @@ class _AttackPageState extends State<AttackPage>
                 ],
               ),
             ),
-
-            // TANIX badge
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
@@ -428,36 +418,6 @@ class _AttackPageState extends State<AttackPage>
             ],
           ),
         ),
-        const SizedBox(width: 8),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-          decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.05),
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: Colors.white.withOpacity(0.15)),
-          ),
-          child: Row(
-            children: [
-              Container(
-                width: 6,
-                height: 6,
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.5),
-                  shape: BoxShape.circle,
-                ),
-              ),
-              const SizedBox(width: 5),
-              Text(
-                "Elegant Edition",
-                style: TextStyle(
-                  color: Colors.white.withOpacity(0.5),
-                  fontSize: 9,
-                  fontFamily: 'Orbitron',
-                ),
-              ),
-            ],
-          ),
-        ),
       ],
     );
   }
@@ -470,10 +430,7 @@ class _AttackPageState extends State<AttackPage>
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [
-            _cardBg,
-            const Color(0xFF0A1A2A),
-          ],
+          colors: [_cardBg, const Color(0xFF0A1A2A)],
         ),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: _primary.withOpacity(0.12)),
@@ -490,17 +447,13 @@ class _AttackPageState extends State<AttackPage>
                   color: _primary.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: const Icon(Icons.bug_report_outlined,
-                    color: _primary, size: 22),
+                child: const Icon(Icons.bug_report_outlined, color: _primary, size: 22),
               ),
               Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
                 decoration: BoxDecoration(
-                  color: Colors.transparent,
                   borderRadius: BorderRadius.circular(20),
-                  border: Border.all(
-                      color: Colors.white.withOpacity(0.2), width: 1),
+                  border: Border.all(color: Colors.white.withOpacity(0.2), width: 1),
                 ),
                 child: Text(
                   "RECOMMENDED",
@@ -619,8 +572,7 @@ class _AttackPageState extends State<AttackPage>
               fontFamily: 'Rajdhani',
               fontSize: 14),
           border: InputBorder.none,
-          contentPadding:
-              const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+          contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
         ),
       ),
     );
@@ -638,13 +590,15 @@ class _AttackPageState extends State<AttackPage>
         child: Text(
           "Tidak ada bug tersedia",
           style: TextStyle(
-              color: Colors.white.withOpacity(0.3),
-              fontFamily: 'Rajdhani'),
+            color: Colors.white.withOpacity(0.5),
+            fontFamily: 'Rajdhani',
+          ),
         ),
       );
     }
+
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 14),
+      padding: const EdgeInsets.symmetric(horizontal: 12),
       decoration: BoxDecoration(
         color: _cardBg2,
         borderRadius: BorderRadius.circular(12),
@@ -652,25 +606,61 @@ class _AttackPageState extends State<AttackPage>
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
-          value: selectedBugId,
-          dropdownColor: const Color(0xFF111820),
+          value: selectedBugId.isNotEmpty ? selectedBugId : null,
+          dropdownColor: _cardBg,
           isExpanded: true,
           icon: const Icon(Icons.keyboard_arrow_down, color: _primary),
-          items: widget.listBug
-              .map((bug) => DropdownMenuItem<String>(
-                    value: bug['bug_id'],
-                    child: Text(
-                      bug['bug_name'].toString().toUpperCase(),
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                        fontFamily: 'Orbitron',
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ))
-              .toList(),
-          onChanged: (val) => setState(() => selectedBugId = val!),
+          style: const TextStyle(
+            color: Colors.white,
+            fontFamily: 'Rajdhani',
+            fontSize: 14,
+          ),
+          items: widget.listBug.map((bug) {
+            return DropdownMenuItem<String>(
+              value: bug['bug_id'],
+              child: Text(bug['bug_name'] ?? bug['bug_id']),
+            );
+          }).toList(),
+          onChanged: (val) {
+            if (val != null) {
+              setState(() => selectedBugId = val);
+            }
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget _buildExecuteButton() {
+        return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12),
+      decoration: BoxDecoration(
+        color: _cardBg2,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Colors.white.withOpacity(0.07)),
+      ),
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton<String>(
+          value: selectedBugId.isNotEmpty ? selectedBugId : null,
+          dropdownColor: _cardBg,
+          isExpanded: true,
+          icon: const Icon(Icons.keyboard_arrow_down, color: _primary),
+          style: const TextStyle(
+            color: Colors.white,
+            fontFamily: 'Rajdhani',
+            fontSize: 14,
+          ),
+          items: widget.listBug.map((bug) {
+            return DropdownMenuItem<String>(
+              value: bug['bug_id'],
+              child: Text(bug['bug_name'] ?? bug['bug_id']),
+            );
+          }).toList(),
+          onChanged: (val) {
+            if (val != null) {
+              setState(() => selectedBugId = val);
+            }
+          },
         ),
       ),
     );
@@ -682,14 +672,23 @@ class _AttackPageState extends State<AttackPage>
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         width: double.infinity,
-        height: 56,
+        height: 54,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(14),
-          border: Border.all(
-            color: _primary.withOpacity(_isSending ? 0.3 : 0.8),
-            width: 1.5,
+          gradient: LinearGradient(
+            colors: _isSending
+                ? [Colors.grey.shade800, Colors.grey.shade900]
+                : [_primary, const Color(0xFF00A080)],
           ),
-          color: _primary.withOpacity(_isSending ? 0.04 : 0.1),
+          borderRadius: BorderRadius.circular(14),
+          boxShadow: _isSending
+              ? []
+              : [
+                  BoxShadow(
+                    color: _primary.withOpacity(0.4),
+                    blurRadius: 15,
+                    spreadRadius: 1,
+                  ),
+                ],
         ),
         child: Center(
           child: _isSending
@@ -697,34 +696,20 @@ class _AttackPageState extends State<AttackPage>
                   width: 22,
                   height: 22,
                   child: CircularProgressIndicator(
-                      color: _primary, strokeWidth: 2.5),
+                      color: Colors.black, strokeWidth: 2.5),
                 )
-              : Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Icon(Icons.send_rounded, color: _primary, size: 18),
-                    SizedBox(width: 10),
-                    Text(
-                      "EXECUTE ATTACK",
-                      style: TextStyle(
-                        color: _primary,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 2,
-                        fontFamily: 'Orbitron',
-                        fontSize: 14,
-                      ),
-                    ),
-                  ],
+              : const Text(
+                  "EXECUTE",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w900,
+                    fontFamily: 'Orbitron',
+                    letterSpacing: 2,
+                  ),
                 ),
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _glowController.dispose();
-    targetController.dispose();
-    super.dispose();
   }
 }
