@@ -1,39 +1,27 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'dart:math' as math;
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:web_socket_channel/status.dart' as status;
-import 'package:url_launcher/url_launcher.dart';
-import 'package:video_player/video_player.dart';
-import 'package:image_picker/image_picker.dart'; // Wajib ada
 
 // ─── Import Pages ─────────────────────────────────────────────────────────
 import 'login_page.dart';
 import 'admin_page.dart';
 import 'seller_page.dart';
 import 'change_password_page.dart';
-import 'tools_gateway.dart'; // Pastikan file ini ada
 
 class _Color {
   static const bg        = Color(0xFF060B14);
   static const surface   = Color(0xFF0C1424);
-  static const card      = Color(0xFF101A2E);
-  static const border    = Color(0xFF1A2D4A);
   static const primary   = Color(0xFFB04AFF);
   static const accent    = Color(0xFFFF2D78);
-  static const blueLight = Color(0xFF56AEF5);
   static const text      = Color(0xFFE2EDF9);
-  static const textSub   = Color(0xFF7A9BBF);
   static const red       = Color(0xFFEF4444);
-  static const green     = Color(0xFF22C55E);
-  static const amber     = Color(0xFFF59E0B);
   
   static const LinearGradient primaryGrad = LinearGradient(
     colors: [primary, accent],
@@ -138,19 +126,14 @@ class _DashboardPageState extends State<DashboardPage> {
       case 'seller':
         nextPage = SellerPage(keyToken: sessionKey);
         break;
-      case 'tools':
-        nextPage = ToolsGateway(
-          username: username, password: widget.password, role: role,
-          expiredDate: expiredDate, sessionKey: sessionKey,
-        );
-        break;
       case 'settings':
         nextPage = ChangePasswordPage(
-          username: username, sessionKey: sessionKey,
+          username: username, 
+          sessionKey: sessionKey,
         );
         break;
       default:
-        nextPage = const Center(child: Text('Halaman belum siap'));
+        nextPage = const Center(child: Text('Halaman belum siap', style: TextStyle(color: Colors.white)));
     }
     _navigateTo(nextIndex, nextPage);
   }
@@ -210,14 +193,6 @@ class _DashboardPageState extends State<DashboardPage> {
                   _selectFromMenu('seller');
                 },
               ),
-            ListTile(
-              leading: const Icon(Icons.construction, color: _Color.text),
-              title: const Text('Tools Gateway', style: TextStyle(color: _Color.text, fontFamily: 'Rajdhani')),
-              onTap: () {
-                Navigator.pop(context);
-                _selectFromMenu('tools');
-              },
-            ),
             ListTile(
               leading: const Icon(Icons.lock, color: _Color.text),
               title: const Text('Settings', style: TextStyle(color: _Color.text, fontFamily: 'Rajdhani')),
