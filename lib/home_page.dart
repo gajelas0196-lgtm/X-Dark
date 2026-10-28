@@ -567,59 +567,6 @@ class _HomePageState extends State<HomePage>
     );
   }
 
-  Widget _buildDropdown() {
-    if (widget.listBug.isEmpty) {
-      return Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: _cardBg2,
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: Colors.white.withOpacity(0.07)),
-        ),
-        child: Text(
-          "Tidak ada bug tersedia",
-          style: TextStyle(
-            color: Colors.white.withOpacity(0.5),
-            fontFamily: 'Rajdhani',
-          ),
-        ),
-      );
-    }
-
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12),
-      decoration: BoxDecoration(
-        color: _cardBg2,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.white.withOpacity(0.07)),
-      ),
-      child: DropdownButtonHideUnderline(
-        child: DropdownButton<String>(
-          value: selectedBugId.isNotEmpty ? selectedBugId : null,
-          dropdownColor: _cardBg,
-          isExpanded: true,
-          icon: const Icon(Icons.keyboard_arrow_down, color: _primary),
-          style: const TextStyle(
-            color: Colors.white,
-            fontFamily: 'Rajdhani',
-            fontSize: 14,
-          ),
-          items: widget.listBug.map((bug) {
-            return DropdownMenuItem<String>(
-              value: bug['bug_id'],
-              child: Text(bug['bug_name'] ?? bug['bug_id']),
-            );
-          }).toList(),
-          onChanged: (val) {
-            if (val != null) {
-              setState(() => selectedBugId = val);
-            }
-          },
-        ),
-      ),
-    );
-  }
-
     Widget _buildDropdown() {
     if (widget.listBug.isEmpty) {
       return Container(
@@ -720,3 +667,4 @@ class _HomePageState extends State<HomePage>
     );
   }
 }
+    
