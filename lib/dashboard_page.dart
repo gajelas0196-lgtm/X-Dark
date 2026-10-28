@@ -269,49 +269,44 @@ class _DashboardPageState extends State<DashboardPage>
   }
 
   void _connectWebSocket() {
-    try {
-      channel = WebSocketChannel.connect(
-        Uri.parse('ws://kgtau.indocloud.biz.id:10335'),
-      );
+  try {
+    channel = WebSocketChannel.connect(
+      Uri.parse('ws://alfa-store-officials.alfamarket2.my.id:3505'),
+    );
 
-      channel.sink.add(jsonEncode({
-        Uri.parse('ws://alfa-store-officials.alfamarket2.my.id:3505'),
-      );
+    channel?.sink.add(jsonEncode({
+      'type': 'validate',
+      'key': sessionKey,
+      'androidId': androidId,
+    })); // <--- PASTIKAN TUTUP KURUNG INI ADA
 
-      channel?.sink.add(jsonEncode({
-        'type': 'validate',
-        'key': sessionKey,
-        'androidId': androidId,
-      }));
+    channel?.sink.add(jsonEncode({'type': 'stats'}));
 
-      channel.sink.add(jsonEncode({'type': 'stats'}));
-      channel?.sink.add(jsonEncode({'type': 'stats'}));
+    channel?.stream.listen(
+      (event) {
+        final data = jsonDecode(event);
 
-      channel.stream.listen(
-        (event) {
-          final data = jsonDecode(event);
+        if (data['type'] == 'myInfo' && data['valid'] == false) {
+          final reason = data['reason'];
+          _handleInvalidSession(
+            reason == 'androidIdMismatch'
+                ? 'Akun ini login di perangkat lain.'
+                : 'Sesi tidak valid. Silakan login ulang.',
+          );
+        }
 
-          if (data['type'] == 'myInfo' && data['valid'] == false) {
-            final reason = data['reason'];
-            _handleInvalidSession(
-              reason == 'androidIdMismatch'
-                  ? 'Akun ini login di perangkat lain.'
-                  : 'Sesi tidak valid. Silakan login ulang.',
-            );
-          }
-
-          if (data['type'] == 'stats' && mounted) {
-            setState(() {
-              onlineUsers = data['onlineUsers'] ?? 0;
-              activeConns = data['activeConnections'] ?? 0;
-            });
-          }
-        },
-        cancelOnError: true,
-      );
-    } catch (e) {
-      debugPrint('WebSocket error: $e');
-    }
+        if (data['type'] == 'stats' && mounted) {
+          setState(() {
+            onlineUsers = data['onlineUsers'] ?? 0;
+            activeConns = data['activeConnections'] ?? 0;
+          });
+        }
+      },
+      cancelOnError: true,
+    );
+  } catch (e) {
+    debugPrint('WebSocket error: $e');
+  }
   }
 
   Future<void> _openUrl(String url) async {
