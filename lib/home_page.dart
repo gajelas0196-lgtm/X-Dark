@@ -60,6 +60,13 @@ class _HomePageState extends State<HomePage>
     }
   }
 
+  @override
+  void dispose() {
+    _glowController.dispose();
+    targetController.dispose();
+    super.dispose();
+  }
+
   String? formatPhoneNumber(String input) {
     final cleaned = input.replaceAll(RegExp(r'[^\d]'), '');
     if (cleaned.startsWith('0') || cleaned.length < 8) return null;
@@ -75,8 +82,7 @@ class _HomePageState extends State<HomePage>
     final key = widget.sessionKey;
 
     if (target == null || key.isEmpty) {
-      _showAlert("❌ INVALID NUMBER",
-          "Gunakan nomor internasional (628xxx), bukan 08xxx.");
+      _showAlert("❌ INVALID NUMBER", "Gunakan nomor internasional (628xxx), bukan 08xxx.");
       setState(() => _isSending = false);
       return;
     }
@@ -209,35 +215,24 @@ class _HomePageState extends State<HomePage>
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // ── HEADER USER INFO ─────────────────────────────────
               _buildUserHeader(),
               const SizedBox(height: 20),
-
-              // ── BUG MENU TITLE (mirip Manta'X Bug Menu) ──────────
               _buildBugMenuTitle(),
               const SizedBox(height: 20),
-
-              // ── BUG CARD ─────────────────────────────────────────
               _buildBugCard(),
               const SizedBox(height: 20),
-
-              // ── INPUT TARGET ─────────────────────────────────────
               _buildSectionLabel("TARGET DESTINATION"),
               const SizedBox(height: 8),
               _buildInput(
                 controller: targetController,
                 hint: "62xxx (contoh: 6281234567890)",
-                icon: Icons.gps_fixed, // <--- Ikon diperbaiki (tadinya crosshairs)
+                icon: Icons.gps_fixed, // <--- Ikon diperbaiki
               ),
               const SizedBox(height: 16),
-
-              // ── SELECT BUG ───────────────────────────────────────
               _buildSectionLabel("PILIH BUG"),
               const SizedBox(height: 8),
               _buildDropdown(),
               const SizedBox(height: 32),
-
-              // ── TOMBOL EXECUTE ───────────────────────────────────
               _buildExecuteButton(),
               const SizedBox(height: 20),
             ],
@@ -247,10 +242,6 @@ class _HomePageState extends State<HomePage>
     );
   }
 
-  // ──────────────────────────────────────────────────────────────────────
-  // WIDGETS
-  // ──────────────────────────────────────────────────────────────────────
-
   Widget _buildUserHeader() {
     return AnimatedBuilder(
       animation: _glowAnimation,
@@ -259,9 +250,7 @@ class _HomePageState extends State<HomePage>
         decoration: BoxDecoration(
           color: _cardBg,
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(
-            color: _primary.withOpacity(0.15),
-          ),
+          border: Border.all(color: _primary.withOpacity(0.15)),
         ),
         child: Row(
           children: [
@@ -631,8 +620,26 @@ class _HomePageState extends State<HomePage>
     );
   }
 
-  Widget _buildExecuteButton() {
-        return Container(
+    Widget _buildDropdown() {
+    if (widget.listBug.isEmpty) {
+      return Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: _cardBg2,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: Colors.white.withOpacity(0.07)),
+        ),
+        child: Text(
+          "Tidak ada bug tersedia",
+          style: TextStyle(
+            color: Colors.white.withOpacity(0.5),
+            fontFamily: 'Rajdhani',
+          ),
+        ),
+      );
+    }
+
+    return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12),
       decoration: BoxDecoration(
         color: _cardBg2,
@@ -712,3 +719,4 @@ class _HomePageState extends State<HomePage>
       ),
     );
   }
+}
