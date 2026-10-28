@@ -69,19 +69,7 @@ class MyApp extends StatelessWidget {
               listBug: List<Map<String, dynamic>>.from(args?['listBug'] ?? []),
             ),
           );
-
-          case '/attack':
-            return MaterialPageRoute(
-              builder: (_) => AttackPage(
-                username: args?['username'] ?? '',
-                password: args?['password'] ?? '',
-                listBug: List<Map<String, dynamic>>.from(args?['listBug'] ?? []),
-                role: args?['role'] ?? '',
-                expiredDate: args?['expiredDate'] ?? '',
-                sessionKey: args?['sessionKey'] ?? '',
-              ),
-            );
-
+            
           case '/seller':
             return MaterialPageRoute(
               builder: (_) => SellerPage(keyToken: args?['keyToken'] ?? ''),
