@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
 
-
 class SplashPage extends StatefulWidget {
   final Map<String, dynamic> data;
 
@@ -51,20 +50,20 @@ class _SplashPageState extends State<SplashPage> {
     _controller.pause();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
 
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (context) => DashboardPage(
-          username: widget.data['username'] ?? '',
-          password: widget.data['password'] ?? '',
-          role: widget.data['role'] ?? 'user',
-          expiredDate: widget.data['expiredDate'] ?? '-',
-          sessionKey: widget.data['key'] ?? '',
-          listBug: List<Map<String, dynamic>>.from(widget.data['listBug'] ?? []),
-          listPayload: List<Map<String, dynamic>>.from(widget.data['listPayload'] ?? []),
-          listDDoS: List<Map<String, dynamic>>.from(widget.data['listDDoS'] ?? []),
-          news: List<Map<String, dynamic>>.from(widget.data['news'] ?? []),
-        ),
-      ),
+    // Menggunakan Named Route (/loader) yang didaftarkan di main.dart
+    Navigator.of(context).pushReplacementNamed(
+      '/loader',
+      arguments: {
+        'username': widget.data['username'] ?? '',
+        'password': widget.data['password'] ?? '',
+        'role': widget.data['role'] ?? 'user',
+        'expiredDate': widget.data['expiredDate'] ?? '-',
+        'key': widget.data['key'] ?? '',
+        'listBug': widget.data['listBug'] ?? [],
+        'listPayload': widget.data['listPayload'] ?? [],
+        'listDDoS': widget.data['listDDoS'] ?? [],
+        'news': widget.data['news'] ?? [],
+      },
     );
   }
 
